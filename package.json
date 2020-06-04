@@ -1,0 +1,38 @@
+{
+  "name": "coachescage",
+  "version": "1.0.0",
+  "description": "a coaching aid",
+  "main": "server/index.js",
+  "scripts": {
+    "test": "npm test",
+    "react-dev": "webpack -d --watch",
+    "server-dev": "nodemon server/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bpderegt/TheCoachesCage.git"
+  },
+  "author": "Brian de Regt",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bpderegt/TheCoachesCage/issues"
+  },
+  "homepage": "https://github.com/bpderegt/TheCoachesCage#readme",
+  "dependencies": {
+    "@babel/core": "^7.10.2",
+    "@babel/preset-env": "^7.10.2",
+    "@babel/preset-react": "^7.10.1",
+    "axios": "^0.19.2",
+    "babel-loader": "^8.1.0",
+    "express": "^4.17.1",
+    "moment": "^2.26.0",
+    "mysql": "^2.18.1",
+    "nodemon": "^2.0.4",
+    "path": "^0.12.7",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "styled-components": "^5.1.1",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11"
+  }
+}
