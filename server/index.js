@@ -5,4 +5,4 @@ const port = 1906
 app.use(express.static(__dirname + '/../client/dist'));
 // app.get('/', (req, res) => res.send('Hello World!'))
 
-app.listen(port, () => console.log(`YES SIR COACH SIR READY TO ROW AT HTTP://LOCALHOST:${port}`))
+app.listen(port, () => console.log(`Sit Ready. Attention... HOST! (at port ${port})`))
