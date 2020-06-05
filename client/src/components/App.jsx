@@ -27,20 +27,28 @@ const ContentWrapper = styled.div`
 
 const AddBoat = styled.button`
   margin-left: 20px;
-  font-size: 1.0em;
+  font-size: 1em;
   padding: 0.5em 1em;
   background: none;
   border: none;
   border-radius: 1em;
   box-shadow: 0px 1px 1px black;
+  :focus {
+    outline: none;
+  }
 `;
 
 const BoatClassSelect = styled.select`
   margin-left: 20px;
+  font-size: 1em;
+  padding: 0.5em 1em;
   border: none;
   border-radius: 1em;
   background: none;
   box-shadow: 0px 1px 1px black;
+  :focus {
+    outline: none;
+  }
 `;
 
 class App extends React.Component {
@@ -192,7 +200,7 @@ class App extends React.Component {
             <option value="2-">2-</option>
             <option value="1x">1x</option>
           </BoatClassSelect>
-          <AddBoat onClick={(e)=>this.addBoat(e)}>Add an 8+</AddBoat>
+    <AddBoat onClick={(e)=>this.addBoat(e)}>Add a{`${this.state.boatClassSelect === '8+' ? `n `: ` `}${this.state.boatClassSelect}`}</AddBoat>
         </HeaderWrapper>
         <ContentWrapper>
           <Roster

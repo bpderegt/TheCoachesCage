@@ -25,4 +25,4 @@ npm install
 
 killall node
 
-npm run server-dev
+node server/index.js
