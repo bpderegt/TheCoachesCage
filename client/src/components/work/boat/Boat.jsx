@@ -5,7 +5,7 @@ import Seat from './Seat.jsx';
 const BoatWrapper = styled.div`
   // border: 1px solid blue;
   border-radius: 4px;
-  min-height: 20em;
+  min-height: 24em;
   width: 16em;
 `;
 
@@ -15,25 +15,27 @@ const ButtonWrapper = styled.div`
   justify-content: space-between;
   margin-top: 1em;
   margin-bottom: 1em;
-  margin-left: 2em;
+  margin-left: 1.75em;
 `;
 
 const Button = styled.button`
+  padding: 0.2em 1em;
   background: none;
   border: none;
   border-radius: 1em;
-  box-shadow: 1px 1px 5px rgba(19, 19, 19, .5);
+  box-shadow: 0px 0.5px 0.5px black;
   :focus {
     outline: none;
   }
   :hover {
     transform: scale(1.05, 1.05);
     cursor: pointer;
-    box-shadow: 0px 0px 10px rgba(19, 19, 19, .5);
+    box-shadow: 0px 0.5px 0.5px black;
+    background: yellow;
   }
   :active {
     box-shadow: none;
-    box-shadow: inset 0px 0px 3px rgba(19, 19, 19, .5);
+    box-shadow: inset 0px 0.5px 0.5px black;
   }
 `;
 

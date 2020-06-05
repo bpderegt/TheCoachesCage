@@ -73,7 +73,7 @@ module.exports = {
   34: {name: 'Sam DeLuca', time: '7:27.4', weight: 110.9, side: 'p', boated: 0, absent: false, status: 3 },
   67: {name: 'Jacob Corfey', time: '7:27.9', weight: 120.8, side: 's', boated: 0, absent: false, status: 3 },
   76: {name: 'Max Jaenike', time: '7:29.0', weight: 141, side: 'p', boated: 0, absent: false, status: 3 },
-  30: {name: '*Jonathan Pham', time: '7:29.2', weight: 120.1, side: 's', boated: 0, absent: false, status: 3 },
+  30: {name: 'Jonathan Pham', time: '7:29.2', weight: 120.1, side: 's', boated: 0, absent: false, status: 3 },
   91: {name: 'Owen Reilly', time: '7:29.4', weight: 104, side: 'p', boated: 0, absent: false, status: 3 },
   50: {name: 'Wilson Baatar', time: '7:31.6', weight: 125.7, side: 'p', boated: 0, absent: false, status: 3 },
   87: {name: 'Christian Espos', time: '7:36.2', weight: 134, side: 's', boated: 0, absent: false, status: 3 },

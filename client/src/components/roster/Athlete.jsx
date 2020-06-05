@@ -6,9 +6,11 @@ const AthleteWrapper = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  border: 1px solid grey;
+  box-shadow: 0px 1px 1px black;
   border-radius: 1em;
   margin: 0.1em;
+  padding: 0.1em;
+  margin-bottom: 0.3em;
   color:
     ${props =>
       props.status === 1 ? "white" : "black"};
@@ -16,7 +18,7 @@ const AthleteWrapper = styled.div`
     ${(props) =>
       props.status === 1 ? "red"
       : props.status === 2 ? "red"
-      : props.status === 3 ? "#ffffbd"
+      : props.status === 3 ? "#f3e375"
       : props.status === 4 ? "#90ee90bd"
       : "red"};
 `;
@@ -55,10 +57,6 @@ const SideWrapper = styled.div`
       props.side === 's' ? "green" :
       "linear-gradient( -45deg, red 50%, green 50% )"};
   `;
-  // border: 0.5em solid
-  //   ${(props) => props.side === "p" ? "red"
-  //   : props.side === "s" ? "green"
-  //   : "lightblue"};
 
 const Athlete = ({ athlete, onPickUp }) => {
   // console.log(athlete)
