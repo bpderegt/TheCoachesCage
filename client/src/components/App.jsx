@@ -38,7 +38,9 @@ class App extends React.Component {
     this.onDrop = this.onDrop.bind(this);
     this.onPickUp = this.onPickUp.bind(this);
     this.onDragOver = this.onDragOver.bind(this);
+    this.removeAthlete = this.removeAthlete.bind(this);
     this.boatClearOrDelete = this.boatClearOrDelete.bind(this);
+    // this.boatedDecrementor = this.boatedDecrementor.bind(this);
   }
 
   componentDidMount() {
@@ -62,7 +64,6 @@ class App extends React.Component {
     const dataId = e.dataTransfer.getData("id");
     const dataBoat = e.dataTransfer.getData("boat");
     const dataSeat = e.dataTransfer.getData("seat");
-
     const { lineups, athletes } = this.state;
 
     let currAthlete = athletes[dataId];
@@ -77,7 +78,7 @@ class App extends React.Component {
       lineups[boat][seat - 1] = currAthlete;
     } else {
       if (lineups[boat][seat - 1].id !== undefined) {
-        athletes[lineups[boat][seat - 1].id].boated = Math.max(athletes[lineups[boat][seat - 1].id].boated - 1, 0);
+        athletes[lineups[boat][seat - 1].id] = Math.max(0, athletes[lineups[boat][seat - 1].id] - 1)
       }
       lineups[boat][seat - 1] = currAthlete;
       currAthlete.boated += 1;
@@ -88,7 +89,20 @@ class App extends React.Component {
     });
   }
 
+  removeAthlete(e, boat, seat) {
+    e.preventDefault();
+    const { lineups, athletes } = this.state;
+
+    athletes[lineups[boat][seat - 1].id] ? athletes[lineups[boat][seat - 1].id].boated = Math.max(0, athletes[lineups[boat][seat - 1].id].boated - 1) : null
+    lineups[boat][seat - 1] = {};
+
+    this.setState({
+      lineups, athletes
+    })
+  }
+
   boatClearOrDelete(e, boat) {
+    // e.preventDefault()
     let action = e.target.className.split(' ');
     action = action[action.length - 1];
 
@@ -102,13 +116,10 @@ class App extends React.Component {
     if (action === "delete") {
       lineups.splice(boat, 1)
     }
-    console.log(this.state.lineups)
 
     this.setState({
       lineups, athletes
     })
-
-    console.log(this.state.lineups)
   }
 
   addBoat(e) {
@@ -142,11 +153,13 @@ class App extends React.Component {
             onDrop={this.onDrop}
             onDragOver={this.onDragOver}
             boatClearOrDelete={this.boatClearOrDelete}
+            removeAthlete={this.removeAthlete}
           />
         </ContentWrapper>
       </PageWrapper>
     )
   }
 }
+
 
 export default App;

@@ -31,12 +31,31 @@ const Athlete = styled.div`
       : "#a7a7a796"};
 `;
 
+const SeatDelete = styled.button`
+  min-height: 1.75em;
+  min-width: 1.75em;
+  border: none;
+  background: none;
+  :hover {
+    cursor: pointer;
+    border: 3px solid #ca0000;
+    border-radius: 1.2em;
+    background: linear-gradient(45deg, transparent 44%, #ca0000 44%, #ca0000 56%, transparent 56%);
+  }
+  :focus {
+    outline: none;
+  }
+  :active {
+    transform: scale(0.90, 0.9);
+  }
+`;
 
-const Seat = ({ athlete, seat, boat, boatSize, onDragOver, onDrop, onPickUp }) => {
+const Seat = ({ athlete, seat, boat, boatSize, onDragOver, onDrop, onPickUp, removeAthlete }) => {
   return (
     <SeatWrapper onDrop={(e)=>onDrop(e, null, boat, seat)} onDragStart={(e)=>onPickUp(e, athlete.id, boat, seat)} >
       <SeatNumber>{seat === 1 ? `b:` : (seat === boatSize - 1) ? `s:` : (seat === boatSize) ? `c:` : `${seat}:`}</SeatNumber>
       <Athlete side={athlete.side} draggable >{athlete.name}</Athlete>
+      <SeatDelete onClick={(e)=>{removeAthlete(e, boat, seat)}}></SeatDelete>
     </SeatWrapper>
   )
 }
