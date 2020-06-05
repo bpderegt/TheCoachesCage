@@ -12,6 +12,11 @@ moment().format();
 
 const PageWrapper = styled.div`
   font-family: 'Lato', sans-serif;
+  // border: 2px solid red;
+  background: #e8e8e8;
+  height: 98vh;
+  width: 98vw;
+  position: relative;
 `;
 
 const HeaderWrapper = styled.div`
@@ -28,26 +33,41 @@ const ContentWrapper = styled.div`
 const AddBoat = styled.button`
   margin-left: 20px;
   font-size: 1em;
-  padding: 0.5em 1em;
-  background: none;
+  padding: 0.5em 0em;
   border: none;
-  border-radius: 1em;
+  border-radius: 1em 0em 0em 1em;
+  height: 2em;
+  width: 4em;
+  background: white;
   box-shadow: 0px 1px 1px black;
   :focus {
     outline: none;
   }
+  :hover {
+    cursor: pointer;
+  }
+  :active {
+    box-shadow: inset 0px 0.5px 0.5px black;
+  }
 `;
 
 const BoatClassSelect = styled.select`
-  margin-left: 20px;
   font-size: 1em;
-  padding: 0.5em 1em;
+  padding: 0.5em 0.5em 0.5em 0.15em;
   border: none;
-  border-radius: 1em;
-  background: none;
+  border-radius: 0em 1em 1em 0em;
+  height: 2em;
+  width: 3em;
+  background: white;
   box-shadow: 0px 1px 1px black;
   :focus {
     outline: none;
+  }
+  :hover {
+    cursor: pointer;
+  }
+  :active {
+    box-shadow: inset 0px 0.5px 0.5px black;
   }
 `;
 
@@ -66,7 +86,6 @@ class App extends React.Component {
     this.onDragOver = this.onDragOver.bind(this);
     this.removeAthlete = this.removeAthlete.bind(this);
     this.boatClassChange = this.boatClassChange.bind(this);
-    this.boatClassSelect = this.boatClassSelect.bind(this);
     this.boatClearOrDelete = this.boatClearOrDelete.bind(this);
   }
 
@@ -101,17 +120,24 @@ class App extends React.Component {
     // console.log(dataSeat)
 
     let currAthlete = athletes[dataId];
-    if ((boat === dataBoat && seat === dataSeat) || (dataBoat === undefined && boat === null)) {
+
+
+    if ((boat === dataBoat && seat === dataSeat) || (dataBoat === undefined && boat === null)) { // if picking up and dropping back in roster
       // nothing to do other than don't throw an error
       return;
-    } else if (boat === null) {
+    } else if (boat === null) { // if dropping in roster
       lineups[dataBoat][dataSeat - 1] = {};
       currAthlete.boated = Math.max(currAthlete.boated - 1, 0);
-    } else if (boat >=0 && dataBoat >= 0) {
+    } else if (boat >=0 && dataBoat >= 0) { // if moving between seats in a boat
       lineups[dataBoat][dataSeat - 1] = {};
+      if (lineups[boat][seat - 1].id !== undefined) { // overwriting from another boat
+        console.log('athlete overwrite boated --')
+        athletes[lineups[boat][seat - 1].id].boated = Math.max(0, athletes[lineups[boat][seat - 1].id].boated - 1)
+      }
       lineups[boat][seat - 1] = currAthlete;
     } else {
-      if (lineups[boat][seat - 1].id !== undefined) {
+      if (lineups[boat][seat - 1].id !== undefined) { // overwritting from roster
+        console.log('athlete overwrite boated --')
         athletes[lineups[boat][seat - 1].id].boated = Math.max(0, athletes[lineups[boat][seat - 1].id].boated - 1)
       }
       lineups[boat][seat - 1] = currAthlete;
@@ -157,12 +183,14 @@ class App extends React.Component {
 
   addBoat(e) {
     e.preventDefault;
-    console.log(this.state.boatClassSelect[this.state.boatClassSelect.length - 1] === '+')
+
 
     const { lineups, boatClassSelect } = this.state;
     let newBoat = [];
     let size = parseInt(boatClassSelect)
     if (boatClassSelect[boatClassSelect.length - 1] === '+') size++;
+
+    if (size === 1) console.log('really? a single? who even rows singles?')
 
     for (let i = 0; i < size; i++) {
       newBoat.push({});
@@ -182,15 +210,12 @@ class App extends React.Component {
     })
   }
 
-  boatClassSelect(e) {
-    e.preventDefault();
-  }
-
   render() {
     return (
       <PageWrapper>
         <HeaderWrapper>
           <h2>THE CAGE ABIDES</h2>
+          <AddBoat onClick={(e)=>this.addBoat(e)}>Add a{`${this.state.boatClassSelect === '8+' ? `n `: ` `}`}</AddBoat>
           <BoatClassSelect onChange={this.boatClassChange}name="boatClass">
             <option value="8+">8+</option>
             <option value="4x">4x</option>
@@ -200,7 +225,6 @@ class App extends React.Component {
             <option value="2-">2-</option>
             <option value="1x">1x</option>
           </BoatClassSelect>
-    <AddBoat onClick={(e)=>this.addBoat(e)}>Add a{`${this.state.boatClassSelect === '8+' ? `n `: ` `}${this.state.boatClassSelect}`}</AddBoat>
         </HeaderWrapper>
         <ContentWrapper>
           <Roster

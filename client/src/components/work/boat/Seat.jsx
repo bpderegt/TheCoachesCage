@@ -10,25 +10,31 @@ const SeatWrapper = styled.div`
 
 const SeatNumber = styled.div`
   min-width: 1.25em;
+  user-select: none;
 `;
 
 const Athlete = styled.div`
+  background: transparent;
   display: flex
   align-items: center;
   // border: 1px solid grey;
   border-radius: 1em;
-  box-shadow: 0px 1px 1px black;
   min-width: 85%;
   padding: 0.3em;
   margin: 0.1em;
   padding-left: 1em;
   height: 1.2em;
+  transform: translate(0,0);
+  box-shadow:
+    ${props =>
+      props.empty ? "inset 0px 1px 1px grey" : "0px 1px 1px grey"
+    };
   background:
     ${props =>
-      props.empty ? "#a7a7a796"
+      props.empty ? "#e8e9e8"
       : props.side === "coxswain" ? "#ffc10796"
-      : (props.port && props.side === "s") ? "linear-gradient( 90deg, #ff949496 90%, #00800096 90% )"
-      : (!props.port && props.side === "p") ? "linear-gradient( 90deg, #94ffa796 90%, #ff000096 90% )"
+      : (props.port && props.side === "s") ? "linear-gradient( 90deg, #ff949496 93%, #94ffa796 93% )"
+      : (!props.port && props.side === "p") ? "linear-gradient( 90deg, #94ffa796 93%, #ff949496 93% )"
       : props.port ? "#ff949496"
       : "#94ffa796"};
 `;

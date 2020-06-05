@@ -3,9 +3,21 @@ import styled from 'styled-components';
 import PerCrew from './PerCrew.jsx';
 
 const PracticeWrapper = styled.div`
-  border: 1px solid black;
+  background: white;
+  border: 1px solid #dcdcdc;
+  border-radius: 1em;
+  box-shadow: 0.25px 1px 1px black;
   display: flex;
   flex-direct: row;
+  height: 88vh;
+  width: 80vw;
+  position: absolute;
+  left: 20em;
+  overflow: auto;
+  ::-webkit-scrollbar {
+    height: 0;
+    width: 0;
+  }
 `;
 
 const BoatAndWork = ({ lineups, onDrop, onDragOver, onPickUp, boatClearOrDelete, removeAthlete }) => {

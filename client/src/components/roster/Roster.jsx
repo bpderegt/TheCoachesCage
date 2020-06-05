@@ -3,25 +3,51 @@ import styled from 'styled-components';
 import { firstBy } from "thenby";
 import Athlete from './Athlete.jsx'
 
-const HeaderWrapper = styled.div`
-`;
-
 const RosterWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: white;
   border: 1px solid #dcdcdc;
   border-radius: 1em;
   box-shadow: 0.25px 1px 1px black;
   margin-right: 2em;
   width: 18em;
   padding: 0.25em;
-  transition: transform 500ms ease;
+  float: left;
   height: 87vh;
-  width:
+`;
+
+const HeaderWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
   position: absolute;
+  top: 4.75em;
+  left: 1.5em;
+`;
+
+const ListWrapper = styled.div`
+  height: 84vh;
+  border-radius: 1em;
+  position: absolute;
+  top: 6.25em;
+  left: 0.5em;
+  padding: 0em 0.2em;
   overflow: auto;
   ::-webkit-scrollbar {
     height: 0;
     width: 0;
   }
+`;
+
+const Name = styled.div`
+  width: 8.5em;
+`;
+const Time = styled.div`
+  width: 3.5em;
+`;
+const Weight = styled.div`
+  width: 3em;
 `;
 
 const Roster = ({ athletes, onPickUp, onDrop, onDragOver }) => {
@@ -42,17 +68,22 @@ const Roster = ({ athletes, onPickUp, onDrop, onDragOver }) => {
     roster.push(athletes[key]);
   };
   roster.sort(
-    firstBy(v => v.status)
+    firstBy(athlete => athlete.status)
     .thenBy("time")
   );
   return (
-    <HeaderWrapper>
-      <RosterWrapper onDragOver={(e)=>onDragOver(e)} onDrop={(e)=>onDrop(e, null, null)}>
+    <RosterWrapper>
+      <HeaderWrapper>
+        <Name>Name</Name>
+        <Time>Time</Time>
+        <Weight>Weight</Weight>
+      </HeaderWrapper>
+      <ListWrapper onDragOver={(e)=>onDragOver(e)} onDrop={(e)=>onDrop(e, null, null)}>
         {roster.map((athlete, index) => (
           <Athlete key={index} athlete={athlete} onPickUp={onPickUp} />
         ))}
-      </RosterWrapper>
-    </HeaderWrapper>
+      </ListWrapper>
+    </RosterWrapper>
   )
 }
 

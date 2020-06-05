@@ -15,7 +15,7 @@ const ButtonWrapper = styled.div`
   justify-content: space-between;
   margin-top: 1em;
   margin-bottom: 1em;
-  margin-left: 1.75em;
+  margin-left: 1.5em;
 `;
 
 const Button = styled.button`
@@ -23,19 +23,19 @@ const Button = styled.button`
   background: none;
   border: none;
   border-radius: 1em;
-  box-shadow: 0px 0.5px 0.5px black;
+  box-shadow: 0px 0.5px 0.5px grey;
   :focus {
     outline: none;
   }
   :hover {
     transform: scale(1.05, 1.05);
     cursor: pointer;
-    box-shadow: 0px 0.5px 0.5px black;
+    box-shadow: 0px 0.5px 0.5px grey;
     background: yellow;
   }
   :active {
     box-shadow: none;
-    box-shadow: inset 0px 0.5px 0.5px black;
+    box-shadow: inset 0px 0.5px 0.5px grey;
   }
 `;
 

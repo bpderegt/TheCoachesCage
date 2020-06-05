@@ -6,14 +6,15 @@ const AthleteWrapper = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  box-shadow: 0px 1px 1px black;
+  box-shadow: 0px 1px 1px grey;
   border-radius: 1em;
   margin: 0.1em;
   padding: 0.1em;
   margin-bottom: 0.3em;
+  transform: translate(0,0);
   color:
     ${props =>
-      props.status === 1 ? "white" : "black"};
+      props.status < 3 ? "white" : "black"};
   background:
     ${(props) =>
       props.status === 1 ? "red"
