@@ -45,19 +45,20 @@ const WeightWrapper = styled.div`
 `;
 
 const SideWrapper = styled.div`
-border-radius: .5em;
-margin-right: 0.25em;
-background:
-  ${(props) =>
-    props.side === "p" ? "red"
-    : props.side === "s" ? "green"
-    : "lightblue"};
-border: 0.5em solid
-  ${(props) => props.side === "p" ? "red"
-  : props.side === "s" ? "green"
-  : "lightblue"};
-`;
-
+  height: 1em;
+  width: 1em;
+  border-radius: 0.5em;
+  margin-right: 0.25em;
+  background:
+    ${props =>
+      props.side === 'p' ? "red" :
+      props.side === 's' ? "green" :
+      "linear-gradient( -45deg, green, green 50%, red 50% )"};
+  `;
+  // border: 0.5em solid
+  //   ${(props) => props.side === "p" ? "red"
+  //   : props.side === "s" ? "green"
+  //   : "lightblue"};
 
 const Athlete = ({ athlete, onPickUp }) => {
   // console.log(athlete)
