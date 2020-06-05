@@ -6,10 +6,19 @@ const AthleteWrapper = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  background: #ffffbd;
   border: 1px solid grey;
   border-radius: 1em;
   margin: 0.1em;
+  color:
+    ${props =>
+      props.status === 1 ? "white" : "black"};
+  background:
+    ${(props) =>
+      props.status === 1 ? "red"
+      : props.status === 2 ? "red"
+      : props.status === 3 ? "#ffffbd"
+      : props.status === 4 ? "#90ee90bd"
+      : "red"};
 `;
 
 const NameWrapper = styled.div`
@@ -36,20 +45,30 @@ const WeightWrapper = styled.div`
 `;
 
 const SideWrapper = styled.div`
-  background: ${(props) => props.side === "p" ? "green" : "red"};
-  border: 0.5em solid ${(props) => props.side === "p" ? "green" : "red"};
-  border-radius: .5em;
-  margin-right: 0.25em;
+border-radius: .5em;
+margin-right: 0.25em;
+background:
+  ${(props) =>
+    props.side === "p" ? "red"
+    : props.side === "s" ? "green"
+    : "lightblue"};
+border: 0.5em solid
+  ${(props) => props.side === "p" ? "red"
+  : props.side === "s" ? "green"
+  : "lightblue"};
 `;
 
 
-const Athlete = ({ athlete, onClick }) => (
-  <AthleteWrapper draggable id={athlete.name} onClick={(e)=>onClick(e)}>
+const Athlete = ({ athlete, onPickUp }) => {
+  // console.log(athlete)
+  return (
+    <AthleteWrapper status={athlete.status} id={athlete.id} onDragStart={(e)=>onPickUp(e, athlete.id)} draggable>
       <NameWrapper >{athlete.name}</NameWrapper>
       <TimeWrapper>{athlete.time}</TimeWrapper>
       <WeightWrapper>{athlete.weight.toString().indexOf('.') === -1 ? `${athlete.weight}.0` : `${athlete.weight}`}</WeightWrapper>
       <SideWrapper side={athlete.side}> </SideWrapper>
-  </AthleteWrapper>
-)
+    </AthleteWrapper>
+  )
+}
 
 export default Athlete;
