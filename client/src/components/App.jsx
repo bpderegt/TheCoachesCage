@@ -162,7 +162,7 @@ class App extends React.Component {
     const { lineups, boatClassSelect } = this.state;
     let newBoat = [];
     let size = parseInt(boatClassSelect)
-    if (boatClassSelect[boatClassSelect - 1] === '+') size++;
+    if (boatClassSelect[boatClassSelect.length - 1] === '+') size++;
 
     for (let i = 0; i < size; i++) {
       newBoat.push({});

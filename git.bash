@@ -26,3 +26,16 @@ npm install
 killall node
 
 node server/index.js
+
+
+
+
+cd
+
+cd TheCoachesCage
+
+git pull origin master
+
+killall node
+
+node server/index.js
