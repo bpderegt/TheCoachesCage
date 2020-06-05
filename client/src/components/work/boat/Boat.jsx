@@ -2,19 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import Seat from './Seat.jsx';
 
-const lineup = [
-  // { id: 2, name: 'Jason Sun', time: '6:27.4', weight: 160.2, side: 'p' },
-  // { id: 54, name: 'Adrian Layer', time: '6:29.5', weight: 202, side: 's' },
-  // { id: 40, name: 'Cam Kumagai', time: '6:29.9', weight: 173.8, side: 'p' },
-  // { id: 59, name: 'Matthew Boranian', time: '6:15.3', weight: 193, side: 's' },
-  // { id: 19, name: 'Kai Hoite', time: '6:25.0', weight: 187.2, side: 'p' },
-  // { id: 57, name: 'John Mark Ozaeta', time: '6:14.9', weight: 200.8, side: 's' },
-  // { id: 32, name: 'Spencer Dettlinger', time: '6:09.4', weight: 201.2, side: 'p' },
-  // { id: 88, name: 'Noah Kim', time: '6:09.2', weight: 186.4, side: 's' },
-  // {id: 103, name: 'Audrey Gates', side: 'coxswain'}
-  {},{},{},{},{},{},{},{},{}
-]
-
 const BoatWrapper = styled.div`
   // border: 1px solid blue;
   border-radius: 4px;
@@ -22,7 +9,37 @@ const BoatWrapper = styled.div`
   width: 16em;
 `;
 
-const Boat = ({ lineup, boat, onDrop, onDragOver, onPickUp }) => (
+const ButtonWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  margin-left: 2em;
+`;
+
+const Button = styled.button`
+  background: none;
+  border: none;
+  border-radius: 1em;
+  box-shadow: 1px 1px 5px rgba(19, 19, 19, .5);
+  :focus {
+    outline: none;
+  }
+  :hover {
+    transform: scale(1.05, 1.05);
+    cursor: pointer;
+    opacity: 1;
+    box-shadow: 0px 0px 10px rgba(19, 19, 19, .5);
+  }
+  :active {
+    box-shadow: none;
+    opacity: 1;
+    box-shadow: inset 0px 0px 3px rgba(19, 19, 19, .5);
+  }
+`;
+
+const Boat = ({ lineup, boat, onDrop, onDragOver, onPickUp, boatClearOrDelete }) => (
   <BoatWrapper onDragOver={(e)=>onDragOver(e)}>
     {lineup.map((athlete, index) => (
       <Seat
@@ -36,6 +53,10 @@ const Boat = ({ lineup, boat, onDrop, onDragOver, onPickUp }) => (
         onPickUp={onPickUp}
         />
     ))}
+    <ButtonWrapper>
+      <Button className="clear" onClick={(e)=>boatClearOrDelete(e, boat)}>Clear Lineup</Button>
+      <Button className="delete" onClick={(e)=>boatClearOrDelete(e, boat)}>Delete Boat</Button>
+    </ButtonWrapper>
   </BoatWrapper>
 )
 

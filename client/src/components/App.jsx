@@ -38,6 +38,7 @@ class App extends React.Component {
     this.onDrop = this.onDrop.bind(this);
     this.onPickUp = this.onPickUp.bind(this);
     this.onDragOver = this.onDragOver.bind(this);
+    this.boatClearOrDelete = this.boatClearOrDelete.bind(this);
   }
 
   componentDidMount() {
@@ -62,47 +63,52 @@ class App extends React.Component {
     const dataBoat = e.dataTransfer.getData("boat");
     const dataSeat = e.dataTransfer.getData("seat");
 
-    const { lineups } = this.state;
-    const { athletes } = this.state;
-
-    console.log('dataId:', dataId, 'dataBoat:', dataBoat, 'dataSeat:', dataSeat)
-    console.log('id:', id, 'boat:', boat, 'seat:', seat)
+    const { lineups, athletes } = this.state;
 
     let currAthlete = athletes[dataId];
     if ((boat === dataBoat && seat === dataSeat) || (dataBoat === undefined && boat === null)) {
-      console.log('triggered')
       // nothing to do other than don't throw an error
       return;
     } else if (boat === null) {
       lineups[dataBoat][dataSeat - 1] = {};
       currAthlete.boated = Math.max(currAthlete.boated - 1, 0);
     } else if (boat >=0 && dataBoat >= 0) {
-      console.log('trigger');
       lineups[dataBoat][dataSeat - 1] = {};
       lineups[boat][seat - 1] = currAthlete;
     } else {
+      if (lineups[boat][seat - 1].id !== undefined) {
+        athletes[lineups[boat][seat - 1].id].boated = Math.max(athletes[lineups[boat][seat - 1].id].boated - 1, 0);
+      }
       lineups[boat][seat - 1] = currAthlete;
       currAthlete.boated += 1;
     }
 
-    //athlete status
-    if (currAthlete.boated > 0 && currAthlete.absent) {
-      currAthlete.status = 1;
-    } else if (currAthlete.boated > 1) {
-      currAthlete.status = 2;
-    } else if (currAthlete.boated === 0) {
-      currAthlete.status = 3;
-    } else if (currAthlete.boated === 1) {
-      currAthlete.status = 4;
-    } else if (currAthlete.absent) {
-      currAthlete.status = 5;
+    this.setState({
+      lineups, athletes
+    });
+  }
+
+  boatClearOrDelete(e, boat) {
+    let action = e.target.className.split(' ');
+    action = action[action.length - 1];
+
+    const { lineups, athletes } = this.state;
+
+    lineups[boat].forEach((athlete, index) => {
+      athletes[athlete.id] ? athletes[athlete.id].boated = Math.max(0, athletes[athlete.id].boated - 1) : null
+      lineups[boat][index] = {};
+    })
+
+    if (action === "delete") {
+      lineups.splice(boat, 1)
     }
+    console.log(this.state.lineups)
 
     this.setState({
-      lineups,
-      athletes
+      lineups, athletes
     })
-    // console.log(this.state)
+
+    console.log(this.state.lineups)
   }
 
   addBoat(e) {
@@ -124,8 +130,19 @@ class App extends React.Component {
           <AddBoat onClick={(e)=>this.addBoat(e)}>Add an 8+</AddBoat>
         </HeaderWrapper>
         <ContentWrapper>
-          <Roster athletes={this.state.athletes} onPickUp={this.onPickUp} onDrop={this.onDrop} onDragOver={this.onDragOver}/>
-          <BoatAndWork lineups={this.state.lineups} onPickUp={this.onPickUp} onDrop={this.onDrop} onDragOver={this.onDragOver}/>
+          <Roster
+            athletes={this.state.athletes}
+            onPickUp={this.onPickUp}
+            onDrop={this.onDrop}
+            onDragOver={this.onDragOver}
+          />
+          <BoatAndWork
+            lineups={this.state.lineups}
+            onPickUp={this.onPickUp}
+            onDrop={this.onDrop}
+            onDragOver={this.onDragOver}
+            boatClearOrDelete={this.boatClearOrDelete}
+          />
         </ContentWrapper>
       </PageWrapper>
     )

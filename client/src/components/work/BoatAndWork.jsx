@@ -18,13 +18,21 @@ const CrewWrapper = styled.div`
   padding-right: 2em;
 `;
 
-const BoatAndWork = ({ lineups, onDrop, onDragOver, onPickUp }) => {
+const BoatAndWork = ({ lineups, onDrop, onDragOver, onPickUp, boatClearOrDelete }) => {
   return (
     <PracticeWrapper>
       {lineups.map((lineup, index) => (
         <CrewWrapper>
-          <Boat key={index} boat={index} lineup={lineup} onDrop={onDrop} onDragOver={onDragOver} onPickUp={onPickUp}/>
-          <Workout />
+          <Boat
+            key={index}
+            boat={index}
+            lineup={lineup}
+            onDrop={onDrop}
+            onDragOver={onDragOver}
+            onPickUp={onPickUp}
+            boatClearOrDelete={boatClearOrDelete}
+          />
+          <Workout key={index + 1}/>
         </CrewWrapper>
       ))}
     </PracticeWrapper>

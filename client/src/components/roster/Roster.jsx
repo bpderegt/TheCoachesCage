@@ -12,6 +12,7 @@ const RosterWrapper = styled.div`
   border: 1px solid black;
   margin-right: 2em;
   padding: 0.25em;
+  transition: transform 500ms ease;
 `;
 
 const Roster = ({ athletes, onPickUp, onDrop, onDragOver }) => {
@@ -19,7 +20,19 @@ const Roster = ({ athletes, onPickUp, onDrop, onDragOver }) => {
 
   for (let key in athletes) {
     athletes[key].id = key;
-    athletes[key].status ? null : athletes[key].status = 3;
+
+    if (athletes[key].boated > 0 && athletes[key].absent) {
+      athletes[key].status = 1;
+    } else if (athletes[key].boated > 1) {
+      athletes[key].status = 2;
+    } else if (athletes[key].boated === 0) {
+      athletes[key].status = 3;
+    } else if (athletes[key].boated === 1) {
+      athletes[key].status = 4;
+    } else if (athletes[key].absent) {
+      athletes[key].status = 5;
+    }
+
     roster.push(athletes[key]);
   }
   roster.sort(
