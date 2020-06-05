@@ -27,7 +27,7 @@ const Athlete = styled.div`
       props.side === "s" ? "#94ffa796"
       : props.side === "p" ? "#ff949496"
       : props.side === "coxswain" ? "#ffc10796"
-      : props.side === "" ? "#7cd7f596"
+      : props.side === "" ? "linear-gradient( -10deg, #ff949496 50%, #94ffa796 50% )"
       : "#a7a7a796"};
 `;
 

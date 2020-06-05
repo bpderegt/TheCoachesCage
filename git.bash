@@ -15,7 +15,7 @@ git version
 
 git clone https://github.com/bpderegt/TheCoachesCage.git
 
-echo copy to here, login, copy the rest
+cd
 
 cd TheCoachesCage
 
@@ -23,4 +23,6 @@ git pull origin master
 
 npm install
 
-npm start
+killall node
+
+npm run server-dev

@@ -53,7 +53,7 @@ const SideWrapper = styled.div`
     ${props =>
       props.side === 'p' ? "red" :
       props.side === 's' ? "green" :
-      "linear-gradient( -45deg, green, green 50%, red 50% )"};
+      "linear-gradient( -45deg, red 50%, green 50% )"};
   `;
   // border: 0.5em solid
   //   ${(props) => props.side === "p" ? "red"
