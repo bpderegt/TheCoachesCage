@@ -63,13 +63,13 @@ const Weight = styled.div`
   width: 3em;
 `;
 
-const Roster = ({ roster, sortParams, paramIdx, onPickUp, onDrop, onDragOver }) => {
+const Roster = ({ roster, sortParams, paramIdx, onPickUp, onDrop, onDragOver, paramChange }) => {
 
   return (
     <RosterWrapper>
       <HeaderWrapper>
         <Name>Name</Name>
-        <Time>
+        <Time onChange={(e)=>paramChange(e)}>
           <option key={paramIdx[0]} value={sortParams[paramIdx[0]]} defaultValue>{sortParams[paramIdx[0]]}</option>
           {sortParams.map((param, index) => (
             index !== paramIdx[0]

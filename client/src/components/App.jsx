@@ -88,6 +88,7 @@ class App extends React.Component {
     this.onDrop = this.onDrop.bind(this);
     this.onPickUp = this.onPickUp.bind(this);
     this.onDragOver = this.onDragOver.bind(this);
+    this.paramChange = this.paramChange.bind(this);
     this.removeAthlete = this.removeAthlete.bind(this);
     this.boatClassChange = this.boatClassChange.bind(this);
     this.boatClearOrDelete = this.boatClearOrDelete.bind(this);
@@ -233,6 +234,21 @@ class App extends React.Component {
     });
   }
 
+  paramChange(e) {
+    e.preventDefault();
+    const { sortParams } = this.state;
+    this.setState({
+      paramIdx: [sortParams.indexOf(e.target.value), 1]
+    })
+    axios.get(`/init/${sortParams.indexOf(e.target.value)}/${1}`)
+      .then(res => {
+        this.setState({
+          athletes: res.data
+        })
+      })
+      .catch(err => console.error(err));
+  }
+
   render() {
     const { lineups, athletes, sortParams, paramIdx } = this.state;
     const roster = [];
@@ -261,7 +277,7 @@ class App extends React.Component {
         <HeaderWrapper>
           <h2>THE CAGE ABIDES</h2>
           <AddBoat onClick={(e)=>this.addBoat(e)}>Add a{`${this.state.boatClassSelect === '8+' ? `n `: ` `}`}</AddBoat>
-          <BoatClassSelect onChange={this.boatClassChange}name="boatClass">
+          <BoatClassSelect onChange={this.boatClassChange} name="boatClass">
             <option value="8+">8+</option>
             <option value="4x">4x</option>
             <option value="4-">4-</option>
@@ -274,11 +290,12 @@ class App extends React.Component {
         <ContentWrapper>
           <Roster
             roster={ roster }
-            sortParams={ sortParams }
             paramIdx={ paramIdx }
-            onPickUp={ this.onPickUp }
+            sortParams={ sortParams }
             onDrop={ this.onDrop }
+            onPickUp={ this.onPickUp }
             onDragOver={ this.onDragOver }
+            paramChange={ this.paramChange }
           />
           <BoatAndWork
             lineups={ lineups }
