@@ -83,9 +83,12 @@ class App extends React.Component {
           sweep: true,
           rig: 'spspspsp'
         },{},{},{},{},{},{},{},{},{}]],
-      boatClassSelect: '8+'
+      boatClassSelect: '8+',
+      boats: {},
+      oars: {}
     }
     this.onDrop = this.onDrop.bind(this);
+    this.addBoat = this.addBoat.bind(this);
     this.onPickUp = this.onPickUp.bind(this);
     this.onDragOver = this.onDragOver.bind(this);
     this.paramChange = this.paramChange.bind(this);
@@ -98,8 +101,11 @@ class App extends React.Component {
     const { paramIdx } = this.state;
     axios.get(`/init/${paramIdx[0]}/${paramIdx[1]}`)
       .then(res => {
+        // console.log(res.data.equipment)
         this.setState({
-          athletes: res.data
+          athletes: res.data.roster,
+          boats: res.data.equipment[0],
+          oars: res.data.equipment[1]
         })
       })
       .catch(err => console.error(err));
@@ -195,16 +201,13 @@ class App extends React.Component {
 
   addBoat(e) {
     e.preventDefault();
-
     const { lineups, boatClassSelect } = this.state;
-
     let newBoat = [{
       boatClass: boatClassSelect,
       coxswain: false,
       sweep: true,
       rig: ''
     }];
-
     //{boatClass: '8+', coxswain: true, sweep: true, rig: 'spspspsp'}
     let size = parseInt(boatClassSelect);
     let appendix = boatClassSelect[boatClassSelect.length - 1]
@@ -214,13 +217,10 @@ class App extends React.Component {
     } else if (appendix === 'x') {
       newBoat[0].sweep = false;
     }
-
     if (size === 1) console.log('really? a single? who even rows singles?')
-
     for (let i = 0; i < size; i++) {
       newBoat.push({});
     }
-
     lineups.push(newBoat);
     this.setState({
       lineups
@@ -240,7 +240,7 @@ class App extends React.Component {
     this.setState({
       paramIdx: [sortParams.indexOf(e.target.value), 1]
     })
-    axios.get(`/init/${sortParams.indexOf(e.target.value)}/${1}`)
+    axios.get(`/updatedParams/${sortParams.indexOf(e.target.value)}/${1}`)
       .then(res => {
         this.setState({
           athletes: res.data
@@ -250,7 +250,13 @@ class App extends React.Component {
   }
 
   render() {
-    const { lineups, athletes, sortParams, paramIdx } = this.state;
+    const {
+      lineups,
+      athletes,
+      sortParams,
+      paramIdx,
+      boats,
+      oars } = this.state;
     const roster = [];
     //status check <-- tech debt right here, maybe plug this into the add/drop
     for (let key in athletes) {
@@ -268,7 +274,6 @@ class App extends React.Component {
       }
       roster.push(athletes[key]);
     };
-    console.log(roster[0])
     roster.sort(
       firstBy(athlete => athlete.status)
       .thenBy("param1")
@@ -300,13 +305,15 @@ class App extends React.Component {
             paramChange={ this.paramChange }
           />
           <BoatAndWork
-            lineups={ lineups }
+            oars={ oars }
+            boats={ boats }
             roster={ roster }
-            onPickUp={ this.onPickUp }
+            lineups={ lineups }
             onDrop={ this.onDrop }
+            onPickUp={ this.onPickUp }
             onDragOver={ this.onDragOver }
-            boatClearOrDelete={ this.boatClearOrDelete }
             removeAthlete={ this.removeAthlete }
+            boatClearOrDelete={ this.boatClearOrDelete }
           />
         </ContentWrapper>
       </PageWrapper>

@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const { boats, oars } = require('../../../../../db/equipment.js');
+
 
 const BoatAndOarWrapper = styled.div`
   display: flex;
@@ -55,10 +55,13 @@ const BoatOption = styled.option`
 `;
 
 
-const BoatAndOars = ({ boatNum, boatDetails }) => {
+const BoatAndOars = ({ boats, oars, boatNum, boatDetails }) => {
   let discipline = 'scull';
   if (boatDetails.sweep) discipline = 'sweep';
   return (
+    boats[boatDetails.boatClass] === undefined
+      ? <BoatAndOarWrapper></BoatAndOarWrapper>
+      :
     <BoatAndOarWrapper>
       <Boats name="Boats">
         <BoatOption value="Boats" defaultValue>Boats</BoatOption>

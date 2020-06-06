@@ -40,9 +40,13 @@ const Button = styled.button`
   }
 `;
 
-const Boat = ({ lineup, boatNum, onDrop, onDragOver, onPickUp, boatClearOrDelete, removeAthlete }) => (
+const Boat = ({ boats, oars, lineup, boatNum, onDrop, onDragOver, onPickUp, boatClearOrDelete, removeAthlete }) => (
   <BoatWrapper onDragOver={(e)=>onDragOver(e)}>
-    <BoatAndOars boatNum={boatNum} boatDetails={lineup[0]}/>
+    <BoatAndOars
+      oars={oars}
+      boats={boats}
+      boatNum={boatNum}
+      boatDetails={lineup[0]}/>
     {lineup.map((athlete, index) => (
       index === 0 ? null :
       <Seat

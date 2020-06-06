@@ -1,6 +1,6 @@
 const boats = {
   '8+': ['Athletics', 'de Reckoning', 'Don Quixote', 'Burke II', 'Farrell', 'Victoria ', 'Herbert', 'Lindsay', 'Plucky', 'Shiva', 'Heylin', 'Burke I', 'Logston', 'No Ka Oi'],
-  '4+': ['Man of Steele', 'The Rocket', 'Guess What?', 'Jack P. Ott', 'Still Classy', 'Torsk', 'Kanghua3', 'Sancho Panza'],
+  '4+': ['Man of Steele', 'The Rocket', 'Guess What', 'Jack P. Ott', 'Still Classy', 'Torsk', 'Kanghua3', 'Sancho Panza'],
   '4x': ['Pheonix', 'Red Rocket', 'Da Boz', 'Rowe Boat'],
   '4-': ['Pheonix', 'Da Boz', 'Rowe Boat'],
   '2x': ['Walter the Walrus', 'Pineapple Express'],
