@@ -224,7 +224,6 @@ class App extends React.Component {
     this.setState({
       lineups
     })
-    console.log(this.state.lineups)
   }
 
   boatClassChange(e) {
@@ -254,8 +253,8 @@ class App extends React.Component {
       roster.push(athletes[key]);
     };
     roster.sort(
-      firstBy(athlete => athlete.status)
-      .thenBy("time")
+      firstBy(athlete => athlete.param1)
+      .thenBy("param2")
     );
     return (
       <PageWrapper>
