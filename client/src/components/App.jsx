@@ -177,8 +177,10 @@ class App extends React.Component {
     const { lineups, athletes } = this.state;
 
     lineups[boat].forEach((athlete, index) => {
-      athletes[athlete.id] ? athletes[athlete.id].boated = Math.max(0, athletes[athlete.id].boated - 1) : null
-      lineups[boat][index] = {};
+      if (index !== 0) {
+        athletes[athlete.id] ? athletes[athlete.id].boated = Math.max(0, athletes[athlete.id].boated - 1) : null
+        lineups[boat][index] = {};
+      }
     })
 
     if (action === "delete") {
