@@ -32,7 +32,7 @@ const NameWrapper = styled.div`
   margin: 0em 0.5em;
 `;
 
-const TimeWrapper = styled.div`
+const Param1Wrapper = styled.div`
   max-width: 3em;
   min-width: 3em;
   overflow: hidden;
@@ -40,7 +40,7 @@ const TimeWrapper = styled.div`
   margin-right: 0.5em;
 `;
 
-const WeightWrapper = styled.div`
+const Param2Wrapper = styled.div`
   max-width: 3em;
   min-width: 3em;
   overflow: hidden;
@@ -64,8 +64,8 @@ const Athlete = ({ athlete, onPickUp }) => {
   return (
     <AthleteWrapper status={athlete.status} id={athlete.id} onDragStart={(e)=>onPickUp(e, athlete.id)} draggable>
       <NameWrapper >{athlete.name}</NameWrapper>
-      <TimeWrapper>{athlete.time}</TimeWrapper>
-      <WeightWrapper>{athlete.weight.toString().indexOf('.') === -1 ? `${athlete.weight}.0` : `${athlete.weight}`}</WeightWrapper>
+      <Param1Wrapper>{athlete.param1}</Param1Wrapper>
+      <Param2Wrapper>{athlete.param2}</Param2Wrapper>
       <SideWrapper side={athlete.side}> </SideWrapper>
     </AthleteWrapper>
   )

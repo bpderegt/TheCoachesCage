@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { firstBy } from "thenby";
 import Athlete from './Athlete.jsx'
 
 const RosterWrapper = styled.div`
@@ -15,7 +14,7 @@ const RosterWrapper = styled.div`
   width: 18em;
   padding: 0.25em;
   float: left;
-  height: 87vh;
+  height: 88vh;
 `;
 
 const HeaderWrapper = styled.div`
@@ -50,27 +49,8 @@ const Weight = styled.div`
   width: 3em;
 `;
 
-const Roster = ({ athletes, onPickUp, onDrop, onDragOver }) => {
-  const roster = [];
-  for (let key in athletes) {
-    athletes[key].id = key;
-    if (athletes[key].boated > 0 && athletes[key].absent) {
-      athletes[key].status = 1;
-    } else if (athletes[key].boated > 1) {
-      athletes[key].status = 2;
-    } else if (athletes[key].boated === 0) {
-      athletes[key].status = 3;
-    } else if (athletes[key].boated === 1) {
-      athletes[key].status = 4;
-    } else if (athletes[key].absent) {
-      athletes[key].status = 5;
-    }
-    roster.push(athletes[key]);
-  };
-  roster.sort(
-    firstBy(athlete => athlete.status)
-    .thenBy("time")
-  );
+const Roster = ({ roster, onPickUp, onDrop, onDragOver }) => {
+
   return (
     <RosterWrapper>
       <HeaderWrapper>

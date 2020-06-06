@@ -1,10 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
+import { firstBy } from "thenby";
 import Roster from './roster/Roster.jsx';
 import BoatAndWork from './work/BoatAndWork.jsx';
 const axios = require('axios');
-
-const data = require('../../../db/static2ks.js');
 
 const moment = require('moment');
 moment().format();
@@ -76,9 +75,14 @@ class App extends React.Component {
     super(props);
     this.state = {
       athletes: {},
-      sortMetrics: [],
-      metricIdx: 0,
-      lineups: [[{boatClass: '8+', coxswain: true, sweep: true, rig: 'spspspsp'},{},{},{},{},{},{},{},{},{}]],
+      sortParams: ['2k PB', 'Weight', '6x500m'],
+      paramIdx: [0, 1],
+      lineups: [[
+        { boatClass: '8+',
+          coxswain: true,
+          sweep: true,
+          rig: 'spspspsp'
+        },{},{},{},{},{},{},{},{},{}]],
       boatClassSelect: '8+'
     }
     this.onDrop = this.onDrop.bind(this);
@@ -90,9 +94,14 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    this.setState({
-      athletes: data
-    })
+    const { paramIdx } = this.state;
+    axios.get(`/init/${paramIdx[0]}/${paramIdx[1]}`)
+      .then(res => {
+        this.setState({
+          athletes: res.data
+        })
+      })
+      .catch(err => console.error(err));
   }
 
   onPickUp(e, id, boat, seat) {
@@ -111,18 +120,21 @@ class App extends React.Component {
     const dataBoat = e.dataTransfer.getData("boat");
     const dataSeat = e.dataTransfer.getData("seat");
     const { lineups, athletes } = this.state;
-    // console.log(id)
-    // console.log(dataId)
-    // console.log(boat)
-    // console.log(dataBoat)
-    // console.log(seat)
-    // console.log(dataSeat)
+
+    // console.log('id: ', id)
+    // console.log('boat: ', boat)
+    // console.log('seat: ', seat)
+    // console.log('dataId: ', dataId)
+    // console.log('dataBoat: ', dataBoat)
+    // console.log('dataSeat: ', dataSeat)
+    // console.log('======')
     let currAthlete = athletes[dataId];
 
-    if ((boat === dataBoat && seat === dataSeat) || (dataBoat === undefined && boat === null)) { // if picking up and dropping back in roster
+    if ((boat === dataBoat && seat === dataSeat) || (dataBoat === 'undefined' && boat === null)) { // if picking up and dropping back in roster
       // nothing to do other than don't throw an error
       return;
     } else if (boat === null) { // if dropping in roster
+      // let result = returnToRoster(athletes[dataId], lineups, dataBoat, dataSeat)
       lineups[dataBoat][dataSeat] = {};
       currAthlete.boated = Math.max(currAthlete.boated - 1, 0);
     } else if (boat >=0 && dataBoat >= 0) { // if moving between seats in a boat
@@ -179,10 +191,10 @@ class App extends React.Component {
   }
 
   addBoat(e) {
-    e.preventDefault;
-
+    e.preventDefault();
 
     const { lineups, boatClassSelect } = this.state;
+
     let newBoat = [{
       boatClass: boatClassSelect,
       coxswain: false,
@@ -191,10 +203,10 @@ class App extends React.Component {
     }];
 
     //{boatClass: '8+', coxswain: true, sweep: true, rig: 'spspspsp'}
-    let size = parseInt(boatClassSelect)
+    let size = parseInt(boatClassSelect);
     let appendix = boatClassSelect[boatClassSelect.length - 1]
     if (appendix === '+') {
-      size++;
+      size += 1;
       newBoat[0].coxswain = true;
     } else if (appendix === 'x') {
       newBoat[0].sweep = false;
@@ -217,10 +229,32 @@ class App extends React.Component {
     e.preventDefault();
     this.setState({
       boatClassSelect: e.target.value
-    })
+    });
   }
 
   render() {
+    const { lineups, athletes } = this.state;
+    const roster = [];
+    //status check <-- tech debt right here, maybe plug this into the add/drop
+    for (let key in athletes) {
+      athletes[key].id = key;
+      if (athletes[key].boated > 0 && athletes[key].absent) {
+        athletes[key].status = 1;
+      } else if (athletes[key].boated > 1) {
+        athletes[key].status = 2;
+      } else if (athletes[key].boated === 0) {
+        athletes[key].status = 3;
+      } else if (athletes[key].boated === 1) {
+        athletes[key].status = 4;
+      } else if (athletes[key].absent) {
+        athletes[key].status = 5;
+      }
+      roster.push(athletes[key]);
+    };
+    roster.sort(
+      firstBy(athlete => athlete.status)
+      .thenBy("time")
+    );
     return (
       <PageWrapper>
         <HeaderWrapper>
@@ -238,18 +272,19 @@ class App extends React.Component {
         </HeaderWrapper>
         <ContentWrapper>
           <Roster
-            athletes={this.state.athletes}
-            onPickUp={this.onPickUp}
-            onDrop={this.onDrop}
-            onDragOver={this.onDragOver}
+            roster={ roster }
+            onPickUp={ this.onPickUp }
+            onDrop={ this.onDrop }
+            onDragOver={ this.onDragOver }
           />
           <BoatAndWork
-            lineups={this.state.lineups}
-            onPickUp={this.onPickUp}
-            onDrop={this.onDrop}
-            onDragOver={this.onDragOver}
-            boatClearOrDelete={this.boatClearOrDelete}
-            removeAthlete={this.removeAthlete}
+            lineups={ lineups }
+            roster={ roster }
+            onPickUp={ this.onPickUp }
+            onDrop={ this.onDrop }
+            onDragOver={ this.onDragOver }
+            boatClearOrDelete={ this.boatClearOrDelete }
+            removeAthlete={ this.removeAthlete }
           />
         </ContentWrapper>
       </PageWrapper>
@@ -257,5 +292,16 @@ class App extends React.Component {
   }
 }
 
+// const returnToRoster = (athlete, lineups, boat, seat) => {
+//   athlete.status = Math.max(athlete.status - 1, 0);
+//   lineups[boat][seat] = {};
+//   return [athlete, lineups];
+// }
+
+// const addToBoat = (athlete, lineups, boat, seat) => {
+//   athlete.status += 1;
+//   lineup[boat][seat] = athlete;
+//   return [athlete, lineups];
+// }
 
 export default App;

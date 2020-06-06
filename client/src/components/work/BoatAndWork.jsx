@@ -9,7 +9,7 @@ const PracticeWrapper = styled.div`
   box-shadow: 0.25px 1px 1px black;
   display: flex;
   flex-direct: row;
-  height: 88vh;
+  height: 90vh;
   width: 80vw;
   position: absolute;
   left: 20em;
@@ -20,11 +20,12 @@ const PracticeWrapper = styled.div`
   }
 `;
 
-const BoatAndWork = ({ lineups, onDrop, onDragOver, onPickUp, boatClearOrDelete, removeAthlete }) => {
+const BoatAndWork = ({ lineups, roster, onDrop, onDragOver, onPickUp, boatClearOrDelete, removeAthlete }) => {
   return (
     <PracticeWrapper>
       {lineups.map((lineup, index) => (
         <PerCrew key={index}
+
           boatNum={index}
           lineup={lineup}
           onDrop={onDrop}

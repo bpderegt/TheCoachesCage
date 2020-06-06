@@ -9,15 +9,16 @@ const BoatAndOarWrapper = styled.div`
   justify-content: center;
   margin-left: 1.75em;
   margin-bottom: 0.5em;
+  margin-right: -0.5em;
 `;
 
 const Boats = styled.select`
-  text-align-last: right;
   -webkit-appearance: none;
+  text-align-last: center;
   font-size: 0.75em;
   border-radius: 1em 0em 0em 1em;
   height: 1.75em;
-  width: 7em;
+  width: 11em;
   background: #e8e9e8;
   border: none;
   padding-right: 0.25em;
@@ -32,6 +33,7 @@ const Boats = styled.select`
 
 const Oars = styled.select`
   -webkit-appearance: none;
+  text-align-last: center;
   font-size: 0.75em;
   border-radius: 0em 1em 1em 0em;
   height: 1.75em;
@@ -59,11 +61,13 @@ const BoatAndOars = ({ boatNum, boatDetails }) => {
   return (
     <BoatAndOarWrapper>
       <Boats name="Boats">
+      <BoatOption value="Boats" defaultValue>Boats</BoatOption>
         {boats[boatDetails.boatClass].map((boat, index) => (
           <BoatOption key={index} value={boat}>{boat}</BoatOption>
         ))}
       </Boats>
       <Oars>
+        <option value="Oars" defaultValue>Oars</option>
         {oars[discipline].map((oar, index) => (
           <option key={index} value={oar}>{oar}</option>
         ))}
