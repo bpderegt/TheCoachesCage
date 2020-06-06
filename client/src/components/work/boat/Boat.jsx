@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import BoatAndOars from './BoatAndOars.jsx';
 import Seat from './Seat.jsx';
 
 const BoatWrapper = styled.div`
@@ -41,6 +42,7 @@ const Button = styled.button`
 
 const Boat = ({ lineup, boatNum, onDrop, onDragOver, onPickUp, boatClearOrDelete, removeAthlete }) => (
   <BoatWrapper onDragOver={(e)=>onDragOver(e)}>
+    <BoatAndOars boatNum={boatNum} boatDetails={lineup[0]}/>
     {lineup.map((athlete, index) => (
       index === 0 ? null :
       <Seat

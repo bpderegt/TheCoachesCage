@@ -53,7 +53,7 @@ const AddBoat = styled.button`
 
 const BoatClassSelect = styled.select`
   font-size: 1em;
-  padding: 0.4em 0em;
+  padding: 0.4em 0em 0.4em 0.45em;
   border: none;
   border-radius: 0em 1em 1em 0em;
   height: 2em;
@@ -111,16 +111,13 @@ class App extends React.Component {
     const dataBoat = e.dataTransfer.getData("boat");
     const dataSeat = e.dataTransfer.getData("seat");
     const { lineups, athletes } = this.state;
-
-    console.log(id)
-    console.log(dataId)
-    console.log(boat)
-    console.log(dataBoat)
-    console.log(seat)
-    console.log(dataSeat)
-
+    // console.log(id)
+    // console.log(dataId)
+    // console.log(boat)
+    // console.log(dataBoat)
+    // console.log(seat)
+    // console.log(dataSeat)
     let currAthlete = athletes[dataId];
-
 
     if ((boat === dataBoat && seat === dataSeat) || (dataBoat === undefined && boat === null)) { // if picking up and dropping back in roster
       // nothing to do other than don't throw an error

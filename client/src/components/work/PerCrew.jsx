@@ -4,6 +4,7 @@ import Boat from './boat/Boat.jsx'
 import Workout from './workout/Workout.jsx'
 
 const CrewWrapper = styled.div`
+  max-width: 16em;
   border-radius: 4px;
   display: flex;
   flex-direction: column;

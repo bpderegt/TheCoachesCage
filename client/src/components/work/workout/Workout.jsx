@@ -5,6 +5,7 @@ const WorkoutWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  margin-left: 1.75em;
 `;
 
 const SelectionWrapper = styled.div`
@@ -56,15 +57,15 @@ const TitleWrapper = styled.div`
 `;
 
 const WorkoutText = styled.textarea`
+  max-width: 18em;
   border: 1px solid grey;
   font-family: 'Lato', sans-serif;
   border-radius: 0.5em;
   margin: 0.5em;
-  margin-left: 2.5em
+  // margin-left: 2.5em
   :focus {
     outline: none;
   }
-  resize: none;
 `;
 
 const Workouts = ({  }) => (

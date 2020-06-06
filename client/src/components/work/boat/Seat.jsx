@@ -9,7 +9,7 @@ const SeatWrapper = styled.div`
 `;
 
 const SeatNumber = styled.div`
-  min-width: 1.25em;
+  min-width: 1.5em;
   user-select: none;
 `;
 
@@ -39,8 +39,8 @@ const Athlete = styled.div`
 `;
 
 const SeatDelete = styled.button`
-  min-height: 1.75em;
-  min-width: 1.75em;
+  min-height: 1.5em;
+  min-width: 1.5em;
   border: none;
   background: none;
   :hover {
@@ -59,14 +59,12 @@ const SeatDelete = styled.button`
 
 const Seat = ({ athlete, seat, boatNum, boatSize, onDragOver, onDrop, onPickUp, removeAthlete }) => {
 
-
-
   return (
     <SeatWrapper onDrop={(e)=>onDrop(e, null, boatNum, seat)} onDragStart={(e)=>onPickUp(e, athlete.id, boatNum, seat)} >
       <SeatNumber>
         {seat === 1 ? `b:`
-        : (seat === boatSize && boatSize % 2 !== 0) ? `c:`
-        : ((seat === boatSize - 1 && boatSize % 2 !== 0) || (seat === boatSize && boatSize % 2 === 0)) ? `s:`
+        : (seat === boatSize - 1 && boatSize % 2 === 0) ? `c:`
+        : ((seat === boatSize - 2 && boatSize % 2 === 0) || (seat === boatSize - 1 && boatSize % 2 === 0)) ? `s:`
         : `${seat}:`}
       </SeatNumber>
       <Athlete
