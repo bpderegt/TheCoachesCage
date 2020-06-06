@@ -15,7 +15,7 @@ const init = (param1, param2, callback) => {
     secondParam[athlete].toString().indexOf('.') === -1 ? roster[athlete].param2 = `${secondParam[athlete]}.0` : roster[athlete].param2 = `${secondParam[athlete]}`
     // roster[athlete].param2 = secondParam[athlete];
   }
-  console.log(roster);
+  // console.log(roster);
   callback(null, roster);
 }
 
