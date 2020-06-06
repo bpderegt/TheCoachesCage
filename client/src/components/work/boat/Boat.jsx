@@ -46,7 +46,7 @@ const Boat = ({ lineup, boatNum, onDrop, onDragOver, onPickUp, boatClearOrDelete
       <Seat
         key={index}
         athlete={athlete}
-        seat={index + 1}
+        seat={index}
         boatNum={boatNum}
         boatSize={lineup.length}
         onDrop={onDrop}

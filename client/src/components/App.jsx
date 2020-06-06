@@ -112,12 +112,12 @@ class App extends React.Component {
     const dataSeat = e.dataTransfer.getData("seat");
     const { lineups, athletes } = this.state;
 
-    // console.log(id)
-    // console.log(dataId)
-    // console.log(boat)
-    // console.log(dataBoat)
-    // console.log(seat)
-    // console.log(dataSeat)
+    console.log(id)
+    console.log(dataId)
+    console.log(boat)
+    console.log(dataBoat)
+    console.log(seat)
+    console.log(dataSeat)
 
     let currAthlete = athletes[dataId];
 
@@ -126,21 +126,21 @@ class App extends React.Component {
       // nothing to do other than don't throw an error
       return;
     } else if (boat === null) { // if dropping in roster
-      lineups[dataBoat][dataSeat - 1] = {};
+      lineups[dataBoat][dataSeat] = {};
       currAthlete.boated = Math.max(currAthlete.boated - 1, 0);
     } else if (boat >=0 && dataBoat >= 0) { // if moving between seats in a boat
-      lineups[dataBoat][dataSeat - 1] = {};
-      if (lineups[boat][seat - 1].id !== undefined) { // overwriting from another boat
+      lineups[dataBoat][dataSeat] = {};
+      if (lineups[boat][seat].id !== undefined) { // overwriting from another boat
         console.log('athlete overwrite boated --')
-        athletes[lineups[boat][seat - 1].id].boated = Math.max(0, athletes[lineups[boat][seat - 1].id].boated - 1)
+        athletes[lineups[boat][seat].id].boated = Math.max(0, athletes[lineups[boat][seat].id].boated - 1)
       }
-      lineups[boat][seat - 1] = currAthlete;
+      lineups[boat][seat] = currAthlete;
     } else {
-      if (lineups[boat][seat - 1].id !== undefined) { // overwritting from roster
+      if (lineups[boat][seat].id !== undefined) { // overwritting from roster
         console.log('athlete overwrite boated --')
-        athletes[lineups[boat][seat - 1].id].boated = Math.max(0, athletes[lineups[boat][seat - 1].id].boated - 1)
+        athletes[lineups[boat][seat].id].boated = Math.max(0, athletes[lineups[boat][seat].id].boated - 1)
       }
-      lineups[boat][seat - 1] = currAthlete;
+      lineups[boat][seat] = currAthlete;
       currAthlete.boated += 1;
     }
 
@@ -153,8 +153,8 @@ class App extends React.Component {
     e.preventDefault();
     const { lineups, athletes } = this.state;
 
-    athletes[lineups[boat][seat - 1].id] ? athletes[lineups[boat][seat - 1].id].boated = Math.max(0, athletes[lineups[boat][seat - 1].id].boated - 1) : null
-    lineups[boat][seat - 1] = {};
+    athletes[lineups[boat][seat].id] ? athletes[lineups[boat][seat].id].boated = Math.max(0, athletes[lineups[boat][seat].id].boated - 1) : null
+    lineups[boat][seat] = {};
 
     this.setState({
       lineups, athletes
