@@ -268,8 +268,10 @@ class App extends React.Component {
       }
       roster.push(athletes[key]);
     };
+    console.log(roster[0])
     roster.sort(
-      firstBy(athlete => athlete.param1)
+      firstBy(athlete => athlete.status)
+      .thenBy("param1")
       .thenBy("param2")
     );
     return (
