@@ -21,12 +21,24 @@ const init = (param1, param2, callback) => {
       roster[athlete].param2 = 'no record';
     }
   }
-  // console.log(equipment)
   callback(null, { roster, equipment });
 }
 
-// const updatedParams = () => {
-//   console.log('hello')
-// }
+const updatedParams = (param1, param2, callback) => {
+  const roster = staticAthletes;
+  let firstParam = twoKPB;
+  if (param1 === '1') firstParam = sixX5;
+  const secondParam = weights;
+  for (let athlete in roster) {
+    if (firstParam[athlete]) {
+      roster[athlete].param1 = firstParam[athlete].time;
+      firstParam[athlete].weight.toString().indexOf('.') === -1 ? roster[athlete].param2 = `${firstParam[athlete].weight}.0` : roster[athlete].param2 = `${firstParam[athlete].weight}`
+    } else {
+      roster[athlete].param1 = 'no record';
+      roster[athlete].param2 = 'no record';
+    }
+  }
+  callback(null, roster);
+}
 
-module.exports = { init };
+module.exports = { init, updatedParams };
