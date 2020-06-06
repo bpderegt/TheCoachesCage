@@ -33,13 +33,13 @@ const ContentWrapper = styled.div`
 const AddBoat = styled.button`
   margin-left: 20px;
   font-size: 1em;
-  padding: 0.5em 0em;
+  padding: 0.5em 0em 0.5em 0.5em;
   border: none;
   border-radius: 1em 0em 0em 1em;
   height: 2em;
   width: 4em;
   background: white;
-  box-shadow: 0px 1px 1px black;
+  box-shadow: 0px 1px 1px grey;
   :focus {
     outline: none;
   }
@@ -47,19 +47,19 @@ const AddBoat = styled.button`
     cursor: pointer;
   }
   :active {
-    box-shadow: inset 0px 0.5px 0.5px black;
+    box-shadow: inset 0px 0.5px 0.5px grey;
   }
 `;
 
 const BoatClassSelect = styled.select`
   font-size: 1em;
-  padding: 0.5em 0.5em 0.5em 0.15em;
+  padding: 0.4em 0em;
   border: none;
   border-radius: 0em 1em 1em 0em;
   height: 2em;
   width: 3em;
   background: white;
-  box-shadow: 0px 1px 1px black;
+  box-shadow: 0px 1px 1px grey;
   :focus {
     outline: none;
   }
@@ -67,7 +67,7 @@ const BoatClassSelect = styled.select`
     cursor: pointer;
   }
   :active {
-    box-shadow: inset 0px 0.5px 0.5px black;
+    box-shadow: inset 0px 0.5px 0.5px grey;
   }
 `;
 
@@ -78,7 +78,7 @@ class App extends React.Component {
       athletes: {},
       sortMetrics: [],
       metricIdx: 0,
-      lineups: [[{},{},{},{},{},{},{},{},{}]],
+      lineups: [[{boatClass: '8+', coxswain: true, sweep: true, rig: 'spspspsp'},{},{},{},{},{},{},{},{},{}]],
       boatClassSelect: '8+'
     }
     this.onDrop = this.onDrop.bind(this);
@@ -186,9 +186,22 @@ class App extends React.Component {
 
 
     const { lineups, boatClassSelect } = this.state;
-    let newBoat = [];
+    let newBoat = [{
+      boatClass: boatClassSelect,
+      coxswain: false,
+      sweep: true,
+      rig: ''
+    }];
+
+    //{boatClass: '8+', coxswain: true, sweep: true, rig: 'spspspsp'}
     let size = parseInt(boatClassSelect)
-    if (boatClassSelect[boatClassSelect.length - 1] === '+') size++;
+    let appendix = boatClassSelect[boatClassSelect.length - 1]
+    if (appendix === '+') {
+      size++;
+      newBoat[0].coxswain = true;
+    } else if (appendix === 'x') {
+      newBoat[0].sweep = false;
+    }
 
     if (size === 1) console.log('really? a single? who even rows singles?')
 

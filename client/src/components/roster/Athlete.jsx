@@ -51,7 +51,7 @@ const SideWrapper = styled.div`
   height: 1em;
   width: 1em;
   border-radius: 0.5em;
-  margin-right: 0.25em;
+  margin: 0em 0.125em 0em;
   background:
     ${props =>
       props.side === 'p' ? "red" :

@@ -23,30 +23,31 @@ const Button = styled.button`
   background: none;
   border: none;
   border-radius: 1em;
-  box-shadow: 0px 0.5px 0.5px grey;
+  box-shadow: 0px 1px 1px grey;
   :focus {
     outline: none;
   }
   :hover {
     transform: scale(1.05, 1.05);
     cursor: pointer;
-    box-shadow: 0px 0.5px 0.5px grey;
+    box-shadow: 0px 1px 1px grey;
     background: yellow;
   }
   :active {
     box-shadow: none;
-    box-shadow: inset 0px 0.5px 0.5px grey;
+    box-shadow: inset 0px 1px 1px grey;
   }
 `;
 
-const Boat = ({ lineup, boat, onDrop, onDragOver, onPickUp, boatClearOrDelete, removeAthlete }) => (
+const Boat = ({ lineup, boatNum, onDrop, onDragOver, onPickUp, boatClearOrDelete, removeAthlete }) => (
   <BoatWrapper onDragOver={(e)=>onDragOver(e)}>
     {lineup.map((athlete, index) => (
+      index === 0 ? null :
       <Seat
         key={index}
         athlete={athlete}
         seat={index + 1}
-        boat={boat}
+        boatNum={boatNum}
         boatSize={lineup.length}
         onDrop={onDrop}
         onDragOver={onDragOver}
@@ -55,8 +56,8 @@ const Boat = ({ lineup, boat, onDrop, onDragOver, onPickUp, boatClearOrDelete, r
       />
     ))}
     <ButtonWrapper>
-      <Button className="clear" onClick={(e)=>boatClearOrDelete(e, boat)}>Clear Lineup</Button>
-      <Button className="delete" onClick={(e)=>boatClearOrDelete(e, boat)}>Delete Boat</Button>
+      <Button className="clear" onClick={(e)=>boatClearOrDelete(e, boatNum)}>Clear Lineup</Button>
+      <Button className="delete" onClick={(e)=>boatClearOrDelete(e, boatNum)}>Delete Boat</Button>
     </ButtonWrapper>
   </BoatWrapper>
 )

@@ -25,7 +25,7 @@ const BoatAndWork = ({ lineups, onDrop, onDragOver, onPickUp, boatClearOrDelete,
     <PracticeWrapper>
       {lineups.map((lineup, index) => (
         <PerCrew key={index}
-          boat={index}
+          boatNum={index}
           lineup={lineup}
           onDrop={onDrop}
           onDragOver={onDragOver}

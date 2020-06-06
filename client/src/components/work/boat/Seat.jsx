@@ -17,7 +17,6 @@ const Athlete = styled.div`
   background: transparent;
   display: flex
   align-items: center;
-  // border: 1px solid grey;
   border-radius: 1em;
   min-width: 85%;
   padding: 0.3em;
@@ -58,9 +57,12 @@ const SeatDelete = styled.button`
   }
 `;
 
-const Seat = ({ athlete, seat, boat, boatSize, onDragOver, onDrop, onPickUp, removeAthlete }) => {
+const Seat = ({ athlete, seat, boatNum, boatSize, onDragOver, onDrop, onPickUp, removeAthlete }) => {
+
+
+
   return (
-    <SeatWrapper onDrop={(e)=>onDrop(e, null, boat, seat)} onDragStart={(e)=>onPickUp(e, athlete.id, boat, seat)} >
+    <SeatWrapper onDrop={(e)=>onDrop(e, null, boatNum, seat)} onDragStart={(e)=>onPickUp(e, athlete.id, boatNum, seat)} >
       <SeatNumber>
         {seat === 1 ? `b:`
         : (seat === boatSize && boatSize % 2 !== 0) ? `c:`
@@ -74,7 +76,7 @@ const Seat = ({ athlete, seat, boat, boatSize, onDragOver, onDrop, onPickUp, rem
         draggable={athlete === undefined ? false : athlete.id !== undefined} >
           {athlete.name}
         </Athlete>
-      <SeatDelete onClick={(e)=>{removeAthlete(e, boat, seat)}}></SeatDelete>
+      <SeatDelete onClick={(e)=>{removeAthlete(e, boatNum, seat)}}></SeatDelete>
     </SeatWrapper>
   )
 }
