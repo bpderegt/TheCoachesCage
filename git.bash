@@ -27,7 +27,9 @@ killall node
 
 node server/index.js
 
-
+git add .
+git commit
+git push origin master
 
 
 cd

@@ -75,7 +75,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       athletes: {},
-      sortParams: ['2k PB', 'Weight', '6x500m'],
+      sortParams: ['2k PB', '6x500m'],
       paramIdx: [0, 1],
       lineups: [[
         { boatClass: '8+',
@@ -234,7 +234,7 @@ class App extends React.Component {
   }
 
   render() {
-    const { lineups, athletes } = this.state;
+    const { lineups, athletes, sortParams, paramIdx } = this.state;
     const roster = [];
     //status check <-- tech debt right here, maybe plug this into the add/drop
     for (let key in athletes) {
@@ -274,6 +274,8 @@ class App extends React.Component {
         <ContentWrapper>
           <Roster
             roster={ roster }
+            sortParams={ sortParams }
+            paramIdx={ paramIdx }
             onPickUp={ this.onPickUp }
             onDrop={ this.onDrop }
             onDragOver={ this.onDragOver }

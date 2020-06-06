@@ -91,5 +91,6 @@ module.exports = {
   91: {realName: 'Owen Reilly', fakeName: 'Zoey Sawayn'}
 }
 
-
-
+// for (let key in names) {
+//   console.log(`${key}|${names[key].realName}|${names[key].fakeName}`)
+// }

@@ -40,22 +40,43 @@ const ListWrapper = styled.div`
 `;
 
 const Name = styled.div`
-  width: 8.5em;
+  user-select: none;
+  width: 7.6em;
 `;
-const Time = styled.div`
-  width: 3.5em;
+const Time = styled.select`
+  -webkit-appearance: none;
+  user-select: none;
+  width: 4.4em;
+  font-size: 1em;
+  border: none;
+  margin-top: 0.1em;
+  text-align-last: center;
+  :focus {
+    outline: none;
+  }
+  :hover {
+    cursor: pointer;
+  }
 `;
 const Weight = styled.div`
+  user-select: none;
   width: 3em;
 `;
 
-const Roster = ({ roster, onPickUp, onDrop, onDragOver }) => {
+const Roster = ({ roster, sortParams, paramIdx, onPickUp, onDrop, onDragOver }) => {
 
   return (
     <RosterWrapper>
       <HeaderWrapper>
         <Name>Name</Name>
-        <Time>Time</Time>
+        <Time>
+          <option key={paramIdx[0]} value={sortParams[paramIdx[0]]} defaultValue>{sortParams[paramIdx[0]]}</option>
+          {sortParams.map((param, index) => (
+            index !== paramIdx[0]
+              ? <option key={index} value={sortParams[index]}>{sortParams[index]}</option>
+              : null
+          ))}
+        </Time>
         <Weight>Weight</Weight>
       </HeaderWrapper>
       <ListWrapper onDragOver={(e)=>onDragOver(e)} onDrop={(e)=>onDrop(e, null, null)}>

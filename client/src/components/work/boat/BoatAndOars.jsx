@@ -61,7 +61,7 @@ const BoatAndOars = ({ boatNum, boatDetails }) => {
   return (
     <BoatAndOarWrapper>
       <Boats name="Boats">
-      <BoatOption value="Boats" defaultValue>Boats</BoatOption>
+        <BoatOption value="Boats" defaultValue>Boats</BoatOption>
         {boats[boatDetails.boatClass].map((boat, index) => (
           <BoatOption key={index} value={boat}>{boat}</BoatOption>
         ))}

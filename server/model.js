@@ -10,9 +10,12 @@ const init = (param1, param2, callback) => {
   const firstParam = twoKPB;
   const secondParam = weights;
   for (let athlete in roster) {
-    roster[athlete].param1 = firstParam[athlete];
+    roster[athlete].param1 = firstParam[athlete].time;
+    roster[athlete].param2 = firstParam[athlete].weight;
+
+
     // hardcoding something that will need to be a conditional later
-    secondParam[athlete].toString().indexOf('.') === -1 ? roster[athlete].param2 = `${secondParam[athlete]}.0` : roster[athlete].param2 = `${secondParam[athlete]}`
+    firstParam[athlete].weight.toString().indexOf('.') === -1 ? roster[athlete].param2 = `${firstParam[athlete].weight}.0` : roster[athlete].param2 = `${firstParam[athlete].weight}`
     // roster[athlete].param2 = secondParam[athlete];
   }
   // console.log(roster);
