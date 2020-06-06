@@ -122,13 +122,13 @@ class App extends React.Component {
     const dataSeat = e.dataTransfer.getData("seat");
     const { lineups, athletes } = this.state;
 
-    // console.log('id: ', id)
-    // console.log('boat: ', boat)
-    // console.log('seat: ', seat)
-    // console.log('dataId: ', dataId)
-    // console.log('dataBoat: ', dataBoat)
-    // console.log('dataSeat: ', dataSeat)
-    // console.log('======')
+    console.log('id: ', id)
+    console.log('boat: ', boat)
+    console.log('seat: ', seat)
+    console.log('dataId: ', dataId)
+    console.log('dataBoat: ', dataBoat)
+    console.log('dataSeat: ', dataSeat)
+    console.log('======')
     let currAthlete = athletes[dataId];
 
     if ((boat === dataBoat && seat === dataSeat) || (dataBoat === 'undefined' && boat === null)) { // if picking up and dropping back in roster

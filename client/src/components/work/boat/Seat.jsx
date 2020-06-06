@@ -58,19 +58,27 @@ const SeatDelete = styled.button`
 `;
 
 const Seat = ({ athlete, seat, boatNum, boatSize, onDragOver, onDrop, onPickUp, removeAthlete }) => {
-  if (seat === 1) { // bowseat
-    seat = 'b:';
-  } else if (seat === boatSize -1 && boatSize % 2 === 0) { // if specs + boatsize is even, and we're at the end, this is the coxswain
-  seat = 'c:';
-  } else if ((seat === boatSize - 2 && boatSize % 2 === 0) || (seat === boatSize - 1)) { // either coxed boat and stroke is 2nd to last seat, or uncoxed and stroke is last
-    seat = 's:';
-  } else {
-    seat = `${seat}:`
-  }
+  // if (seat === 1) { // bowseat
+  //   seat = 'b:';
+  // } else if (seat === boatSize -1 && boatSize % 2 === 0) { // if specs + boatsize is even, and we're at the end, this is the coxswain
+  // seat = 'c:';
+  // } else if ((seat === boatSize - 2 && boatSize % 2 === 0) || (seat === boatSize - 1)) { // either coxed boat and stroke is 2nd to last seat, or uncoxed and stroke is last
+  //   seat = 's:';
+  // } else {
+  //   seat = `${seat}:`
+  // }
 
   return (
     <SeatWrapper onDrop={(e)=>onDrop(e, null, boatNum, seat)} onDragStart={(e)=>onPickUp(e, athlete.id, boatNum, seat)} >
-      <SeatNumber>{seat}</SeatNumber>
+      <SeatNumber>
+        {seat === 1
+          ? `b:`
+          : (seat === boatSize -1 && boatSize % 2 === 0)
+            ? `c:`
+            : ((seat === boatSize - 2 && boatSize % 2 === 0) || (seat === boatSize - 1))
+              ? `s:`
+              : `${seat}:`}
+      </SeatNumber>
       <Athlete
         port={seat % 2 === 0}
         empty={athlete === undefined ? false : athlete.id === undefined}
