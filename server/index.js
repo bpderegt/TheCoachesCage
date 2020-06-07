@@ -7,6 +7,7 @@ const { init, updatedParams } = require('./model.js');
 app.use(express.static(__dirname + '/../client/dist'));
 
 app.get('/init/:id1/:id2', (req, res) => {
+  console.log('init')
   init(req.params.id1, req.params.id2, (err, data) => {
     if (err) {
       res.status(404).send(err);
@@ -17,6 +18,7 @@ app.get('/init/:id1/:id2', (req, res) => {
 });
 
 app.get('/updatedParams/:id1/:id2', (req, res) => {
+  console.log('updatedParams')
   updatedParams(req.params.id1, req.params.id2, (err, data) => {
     if (err) {
       res.status(404).send(err);

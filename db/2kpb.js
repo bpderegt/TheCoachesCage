@@ -1,4 +1,4 @@
-const weights = require('./weights');
+
 
 module.exports = {
   1: { time: '6:48.4', weight: 159.8},
