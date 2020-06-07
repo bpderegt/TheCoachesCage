@@ -22,7 +22,7 @@ const Athlete = styled.div`
   padding: 0.3em;
   margin: 0.1em;
   padding-left: 1em;
-  height: 1.21em;
+  height: 1.2em;
   transform: translate(0,0);
   :focus {
     outline: none;
@@ -38,6 +38,7 @@ const Athlete = styled.div`
     ${props =>
       props.empty ? "#e8e9e8"
       : props.side === "coxswain" ? "#ffc10796"
+      : props.sculling ? "#00b6ff96"
       : (props.port && props.side === "s") ? "linear-gradient( 90deg, #ff949496 93%, #94ffa796 93% )"
       : (!props.port && props.side === "p") ? "linear-gradient( 90deg, #94ffa796 93%, #ff949496 93% )"
       : props.port ? "#ff949496"
@@ -72,6 +73,7 @@ const AthleteSelect = styled.select`
     ${props =>
       props.empty ? "#e8e9e8"
       : props.side === "coxswain" ? "#ffc10796"
+      : props.sculling ? "blue"
       : (props.port && props.side === "s") ? "linear-gradient( 90deg, #ff949496 93%, #94ffa796 93% )"
       : (!props.port && props.side === "p") ? "linear-gradient( 90deg, #94ffa796 93%, #ff949496 93% )"
       : props.port ? "#ff949496"
@@ -97,7 +99,8 @@ const SeatDelete = styled.button`
   }
 `;
 
-const Seat = ({ athlete, seat, roster, boatNum, boatSize, onDragOver, onDrop, onPickUp, removeAthlete, onAthleteDropDownSelection }) => {
+const Seat = ({ athlete, seat, roster, sculling, boatNum, boatSize, onDragOver, onDrop, onPickUp, removeAthlete, onAthleteDropDownSelection }) => {
+  // console.log(athlete.id !== undefined)
   return (
     <SeatWrapper onDrop={(e)=>onDrop(e, null, boatNum, seat)} onDragStart={(e)=>onPickUp(e, athlete.id, boatNum, seat)} >
       <SeatNumber>
@@ -109,10 +112,11 @@ const Seat = ({ athlete, seat, roster, boatNum, boatSize, onDragOver, onDrop, on
               ? `s:`
               : `${seat}:`}
       </SeatNumber>
-      {athlete.id >=0
+      {athlete.id !== undefined
       ? <Athlete
           onChange={(e)=>onAthleteDropDownSelection(e, boatNum, seat)}
           port={seat % 2 === 0}
+          sculling={sculling}
           empty={athlete === undefined ? false : athlete.id === undefined}
           side={athlete === undefined ? null : athlete.side}
           draggable={athlete === undefined ? false : athlete.id !== undefined} >{athlete.name}

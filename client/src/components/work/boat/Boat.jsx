@@ -11,6 +11,7 @@ const BoatWrapper = styled.div`
 `;
 
 const ButtonWrapper = styled.div`
+  user-select: none;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -51,14 +52,15 @@ const Boat = ({ boats, oars, lineup, roster, boatNum, onDrop, onDragOver, onPick
       index === 0 ? null :
       <Seat
         key={index}
-        athlete={athlete}
         seat={index}
         roster={roster}
         boatNum={boatNum}
+        athlete={athlete}
         boatSize={lineup.length}
+        sculling={!lineup[0].sweep}
         onDrop={onDrop}
-        onDragOver={onDragOver}
         onPickUp={onPickUp}
+        onDragOver={onDragOver}
         removeAthlete={removeAthlete}
         onAthleteDropDownSelection={onAthleteDropDownSelection}
       />

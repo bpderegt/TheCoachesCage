@@ -32,6 +32,7 @@ const ContentWrapper = styled.div`
 const AddBoat = styled.button`
   margin-left: 20px;
   font-size: 1em;
+  user-select: none;
   padding: 0.5em 0em 0.5em 0.5em;
   border: none;
   border-radius: 1em 0em 0em 1em;
@@ -53,6 +54,7 @@ const AddBoat = styled.button`
 const BoatClassSelect = styled.select`
   font-size: 1em;
   padding: 0.4em 0em 0.4em 0.45em;
+  user-select: none;
   border: none;
   border-radius: 0em 1em 1em 0em;
   height: 2em;
@@ -85,14 +87,17 @@ class App extends React.Component {
         },{},{},{},{},{},{},{},{},{}]],
       boatClassSelect: '8+',
       boats: {},
-      oars: {}
+      oars: {},
+      workouts: ['']
     }
     this.onDrop = this.onDrop.bind(this);
     this.addBoat = this.addBoat.bind(this);
     this.onPickUp = this.onPickUp.bind(this);
     this.onDragOver = this.onDragOver.bind(this);
     this.paramChange = this.paramChange.bind(this);
+    this.onCopyWorkout = this.onCopyWorkout.bind(this);
     this.removeAthlete = this.removeAthlete.bind(this);
+    this.onWorkoutChange = this.onWorkoutChange.bind(this);
     this.boatClassChange = this.boatClassChange.bind(this);
     this.boatClearOrDelete = this.boatClearOrDelete.bind(this);
     this.onAthleteDropDownSelection = this.onAthleteDropDownSelection.bind(this);
@@ -182,7 +187,7 @@ class App extends React.Component {
     let action = e.target.className.split(' ');
     action = action[action.length - 1];
 
-    const { lineups, athletes } = this.state;
+    const { lineups, athletes, workouts } = this.state;
 
     lineups[boat].forEach((athlete, index) => {
       if (index !== 0) {
@@ -193,16 +198,17 @@ class App extends React.Component {
 
     if (action === "delete") {
       lineups.splice(boat, 1)
+      workouts.splice(boat, 1)
     }
 
     this.setState({
-      lineups, athletes
+      lineups, athletes, workouts
     })
   }
 
   addBoat(e) {
     e.preventDefault();
-    const { lineups, boatClassSelect } = this.state;
+    const { lineups, boatClassSelect, workouts } = this.state;
     let newBoat = [{
       boatClass: boatClassSelect,
       coxswain: false,
@@ -223,8 +229,9 @@ class App extends React.Component {
       newBoat.push({});
     }
     lineups.push(newBoat);
+    workouts.push('')
     this.setState({
-      lineups
+      lineups, workouts
     })
   }
 
@@ -262,6 +269,29 @@ class App extends React.Component {
     })
   }
 
+  onWorkoutChange(e, boat) {
+    e.preventDefault()
+    const { workouts } = this.state;
+    console.log(workouts)
+    workouts[boat] = e.target.value;
+    this.setState({
+      workouts
+    })
+  }
+
+  onCopyWorkout(e, boat) {
+    e.preventDefault()
+    const { workouts } = this.state;
+    if (e.target.value === 'right') {
+      workouts[boat + 1] = workouts[boat];
+    } else {
+      workouts[boat - 1] = workouts[boat];
+    }
+    this.setState({
+      workouts
+    })
+  }
+
   render() {
     const {
       lineups,
@@ -269,7 +299,9 @@ class App extends React.Component {
       sortParams,
       paramIdx,
       boats,
-      oars } = this.state;
+      oars,
+      workouts
+    } = this.state;
     const roster = [];
     //status check <-- tech debt right here, maybe plug this into the add/drop
     for (let key in athletes) {
@@ -322,10 +354,13 @@ class App extends React.Component {
             boats={ boats }
             roster={ roster }
             lineups={ lineups }
+            workouts={ workouts }
             onDrop={ this.onDrop }
             onPickUp={ this.onPickUp }
             onDragOver={ this.onDragOver }
             removeAthlete={ this.removeAthlete }
+            onCopyWorkout={ this.onCopyWorkout }
+            onWorkoutChange={ this.onWorkoutChange }
             boatClearOrDelete={ this.boatClearOrDelete }
             onAthleteDropDownSelection={ this.onAthleteDropDownSelection }
           />

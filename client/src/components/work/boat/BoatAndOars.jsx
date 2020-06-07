@@ -4,6 +4,7 @@ import styled from 'styled-components';
 
 
 const BoatAndOarWrapper = styled.div`
+  user-select: none;
   display: flex;
   flex-direction: row;
   justify-content: center;

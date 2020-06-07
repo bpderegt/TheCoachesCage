@@ -13,47 +13,38 @@ const SelectionWrapper = styled.div`
   flex-direction: row;
 `;
 
-const WorkoutSelectorButton = styled.button`
-  margin-left: 20px;
-  font-size: 0.7em;
-  border: none;
-  border-radius: 1em 0em 0em 1em;
-  height: 2em;
-  width: 6em;
-  background: white;
-  box-shadow: 0px 1px 1px grey;
-  :focus {
-    outline: none;
-  }
-  :hover {
-    cursor: pointer;
-  }
-  :active {
-    box-shadow: inset 0px 1px 1px grey;
-  }
-`;
-
-const BoatClassSelect = styled.select`
-  font-size: 0.7em;
-  border: none;
-  border-radius: 0em 1em 1em 0em;
-  height: 2em;
-  width: 8em;
-  background: white;
-  box-shadow: 0px 1px 1px grey;
-  :focus {
-    outline: none;
-  }
-  :hover {
-    cursor: pointer;
-  }
-  :active {
-    box-shadow: inset 0px 1px 1px grey;
-  }
-`;
-
 const TitleWrapper = styled.div`
-  margin:auto;
+  display: flex;
+  justify-content: space-between;
+  margin: auto;
+  width: 90%;
+  user-select: none;
+`;
+
+const CopyLeftButton = styled.button`
+  border: 1px solid transparent;
+  background: none;
+  :focus {
+    outline: none;
+  }
+  :hover {
+    cursor: pointer;
+    border: 1px solid grey;
+    border-radius: 100%;
+  }
+`;
+
+const CopyRightButton = styled.button`
+  border: 1px solid transparent;
+  background: none;
+  :focus {
+    outline: none;
+  }
+  :hover {
+    cursor: pointer;
+    border: 1px solid grey;
+    border-radius: 100%;
+  }
 `;
 
 const WorkoutText = styled.textarea`
@@ -68,19 +59,14 @@ const WorkoutText = styled.textarea`
   }
 `;
 
-const Workouts = ({  }) => (
+const Workouts = ({ boatNum, workouts, onCopyWorkout, onWorkoutChange }) => (
   <WorkoutWrapper>
-    <TitleWrapper>Workout</TitleWrapper>
-    {/* <SelectionWrapper> */}
-      {/* <WorkoutSelectorButton>Add a</WorkoutSelectorButton> */}
-      {/* <BoatClassSelect>
-        <option value="preRow">Pre Row</option>
-        <option value="drill">Drill</option>
-        <option value="work">Work</option>
-        <option value="postRow">Post Row</option>
-      </BoatClassSelect> */}
-    {/* </SelectionWrapper> */}
-    <WorkoutText name="workout" rows="21" cols="33" autoCapitalize="none" autoComplete="off"></WorkoutText>
+    <TitleWrapper>
+      <CopyLeftButton value="left" onClick={(e)=>onCopyWorkout(e, boatNum)}>⇇</CopyLeftButton>
+      Workout
+      <CopyRightButton value="right" onClick={(e)=>onCopyWorkout(e, boatNum)}>⇉</CopyRightButton>
+    </TitleWrapper>
+    <WorkoutText name="workout" rows="21" cols="33" autoCapitalize="none" autoComplete="off" value={workouts[boatNum]} onChange={(e)=>onWorkoutChange(e, boatNum)}></WorkoutText>
   </WorkoutWrapper>
 )
 
