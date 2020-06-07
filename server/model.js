@@ -1,7 +1,6 @@
 const staticAthletes = require('../db/staticAthletes.js');
 const twoKPB = require('../db/2kpb.js');
 const sixX5 = require('../db/6x500m.js');
-const weights = require('../db/weights.js');
 const { boats, oars } = require('../db/equipment.js');
 // const twoKPB = require('../db/2kpbs.js');
 
