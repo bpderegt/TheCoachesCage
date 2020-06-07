@@ -1,3 +1,5 @@
+const faker = require('faker');
+
 module.exports = {
   1: { name: "Brad McKenzie", param1: "", param2: "", side: "s", boated: 0, absent: false, status: 3},
   2: { name: "Devan Green", param1: "", param2: "", side: "p", boated: 0, absent: false, status: 3},
@@ -88,12 +90,38 @@ module.exports = {
   88: { name: "Jonathon Ziemann", param1: "", param2: "", side: "s", boated: 0, absent: false, status: 3},
   89: { name: "Tony Rippin", param1: "", param2: "", side: "p", boated: 0, absent: false, status: 3},
   90: { name: "Marisol Champlin", param1: "", param2: "", side: "s", boated: 0, absent: false, status: 3},
-  91: { name: "Zoey Sawayn", param1: "", param2: "", side: "", boated: 0, absent: false, status: 3}
+  91: { name: "Zoey Sawayn", param1: "", param2: "", side: "", boated: 0, absent: false, status: 3},
+  c1: { name: "Joanny Wilderman", param1: "", param2: "", side: "coxswain", boated: 0, absent: false},
+  c2: { name: "Juanita Collins", param1: "", param2: "", side: "coxswain", boated: 0, absent: false},
+  c3: { name: "Rick Ebert", param1: "", param2: "", side: "coxswain", boated: 0, absent: false},
+  c4: { name: "Alisa Hodkiewicz", param1: "", param2: "", side: "coxswain", boated: 0, absent: false},
+  c5: { name: "Adrianna Rohan", param1: "", param2: "", side: "coxswain", boated: 0, absent: false},
+  c6: { name: "Lydia Fahey", param1: "", param2: "", side: "coxswain", boated: 0, absent: false},
+  c7: { name: "Sheldon Schuppe", param1: "", param2: "", side: "coxswain", boated: 0, absent: false},
+  c8: { name: "Giovanni Lueilwitz", param1: "", param2: "", side: "coxswain", boated: 0, absent: false},
+  c9: { name: "Marisa Senger", param1: "", param2: "", side: "coxswain", boated: 0, absent: false},
+  c10: { name: "Dana Daniel", param1: "", param2: "", side: "coxswain", boated: 0, absent: false}
 };
 
 // let side = ["p", "s", ""];
+
+// let coxswains = ["Audrey Gates",
+// "Esha Bhattacharya",
+// "Aria Chang",
+// "Anastasiia Zhuk",
+// "Gabe Seidl",
+// "Denis Valois",
+// "Jalen Fu",
+// "Amir Kherbache",
+// "Byron Chan",
+// "Z Romero"]
+
+// for (let i = 0; i < coxswains.length; i++) {
+//   console.log(`c${i + 1}: { name: "${faker.name.firstName()} ${faker.name.lastName()}", param1: "", param2: "", side: "coxswain", boated: ${0}, absent: ${false}}, `)
+// }
 
 // for (let key in athletes) {
 
 //   console.log(`${key}: { name: "${athletes[key].name}", param1: "", param2: "", side: "${side[Math.floor(Math.random() * 3)]}", boated: ${0}, absent: ${false}, status: ${3}},`);
 // }
+

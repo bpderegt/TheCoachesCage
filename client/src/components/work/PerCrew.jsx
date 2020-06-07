@@ -13,13 +13,14 @@ const CrewWrapper = styled.div`
   padding-right: 2em;
 `;
 
-const PerCrew = ({boatNum, boats, oars, lineup, onDrop, onDragOver, onPickUp, boatClearOrDelete, removeAthlete}) => {
+const PerCrew = ({boatNum, boats, oars, roster, lineup, onDrop, onDragOver, onPickUp, boatClearOrDelete, removeAthlete, onAthleteDropDownSelection}) => {
 
   return (
     <CrewWrapper>
       <Boat
-        oars={ oars }
-        boats={ boats }
+        oars={oars}
+        boats={boats}
+        roster={roster}
         lineup={lineup}
         boatNum={boatNum}
         onDrop={onDrop}
@@ -27,6 +28,7 @@ const PerCrew = ({boatNum, boats, oars, lineup, onDrop, onDragOver, onPickUp, bo
         onPickUp={onPickUp}
         boatClearOrDelete={boatClearOrDelete}
         removeAthlete={removeAthlete}
+        onAthleteDropDownSelection={onAthleteDropDownSelection}
       />
       <Workout />
     </CrewWrapper>

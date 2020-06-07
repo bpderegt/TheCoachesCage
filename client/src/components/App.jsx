@@ -95,6 +95,7 @@ class App extends React.Component {
     this.removeAthlete = this.removeAthlete.bind(this);
     this.boatClassChange = this.boatClassChange.bind(this);
     this.boatClearOrDelete = this.boatClearOrDelete.bind(this);
+    this.onAthleteDropDownSelection = this.onAthleteDropDownSelection.bind(this);
   }
 
   componentDidMount() {
@@ -128,13 +129,13 @@ class App extends React.Component {
     const dataSeat = e.dataTransfer.getData("seat");
     const { lineups, athletes } = this.state;
 
-    console.log('id: ', id)
-    console.log('boat: ', boat)
-    console.log('seat: ', seat)
-    console.log('dataId: ', dataId)
-    console.log('dataBoat: ', dataBoat)
-    console.log('dataSeat: ', dataSeat)
-    console.log('======')
+    // console.log('id: ', id)
+    // console.log('boat: ', boat)
+    // console.log('seat: ', seat)
+    // console.log('dataId: ', dataId)
+    // console.log('dataBoat: ', dataBoat)
+    // console.log('dataSeat: ', dataSeat)
+    // console.log('======')
     let currAthlete = athletes[dataId];
 
     if ((boat === dataBoat && seat === dataSeat) || (dataBoat === 'undefined' && boat === null)) { // if picking up and dropping back in roster
@@ -249,6 +250,18 @@ class App extends React.Component {
       .catch(err => console.error(err));
   }
 
+  onAthleteDropDownSelection(e, boat, seat) {
+    e.preventDefault()
+    console.log(e.target.value)
+    console.log(boat, seat)
+    const { athletes, lineups } = this.state
+    athletes[e.target.value].boated += 1;
+    lineups[boat][seat] = athletes[e.target.value];
+    this.setState({
+      lineups, athletes
+    })
+  }
+
   render() {
     const {
       lineups,
@@ -314,6 +327,7 @@ class App extends React.Component {
             onDragOver={ this.onDragOver }
             removeAthlete={ this.removeAthlete }
             boatClearOrDelete={ this.boatClearOrDelete }
+            onAthleteDropDownSelection={ this.onAthleteDropDownSelection }
           />
         </ContentWrapper>
       </PageWrapper>

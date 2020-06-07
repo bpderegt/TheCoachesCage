@@ -12,18 +12,58 @@ const SeatNumber = styled.div`
   min-width: 1.5em;
   user-select: none;
 `;
-
 const Athlete = styled.div`
   background: transparent;
+  font-size: 1em;
   display: flex
   align-items: center;
   border-radius: 1em;
-  min-width: 85%;
+  min-width: 85.5%;
   padding: 0.3em;
   margin: 0.1em;
   padding-left: 1em;
-  height: 1.2em;
+  height: 1.21em;
   transform: translate(0,0);
+  :focus {
+    outline: none;
+  }
+  :hover {
+    cursor: pointer;
+  }
+  box-shadow:
+    ${props =>
+      props.empty ? "inset 0px 1px 1px grey" : "0px 1px 1px grey"
+    };
+  background:
+    ${props =>
+      props.empty ? "#e8e9e8"
+      : props.side === "coxswain" ? "#ffc10796"
+      : (props.port && props.side === "s") ? "linear-gradient( 90deg, #ff949496 93%, #94ffa796 93% )"
+      : (!props.port && props.side === "p") ? "linear-gradient( 90deg, #94ffa796 93%, #ff949496 93% )"
+      : props.port ? "#ff949496"
+      : "#94ffa796"};
+`;
+
+const AthleteSelect = styled.select`
+  -webkit-appearance: none;
+  background: transparent;
+  font-size: 1em;
+  border: none;
+  display: flex
+  align-items: center;
+  border-radius: 1em;
+  min-width: 94%;
+  padding: 0.3em;
+  margin: 0.1em;
+  padding-left: 1em;
+  height: 1.8em;
+  transform: translate(0,0);
+  :focus {
+    outline: none;
+  }
+  :hover {
+    cursor: pointer;
+  }
   box-shadow:
     ${props =>
       props.empty ? "inset 0px 1px 1px grey" : "0px 1px 1px grey"
@@ -57,17 +97,7 @@ const SeatDelete = styled.button`
   }
 `;
 
-const Seat = ({ athlete, seat, boatNum, boatSize, onDragOver, onDrop, onPickUp, removeAthlete }) => {
-  // if (seat === 1) { // bowseat
-  //   seat = 'b:';
-  // } else if (seat === boatSize -1 && boatSize % 2 === 0) { // if specs + boatsize is even, and we're at the end, this is the coxswain
-  // seat = 'c:';
-  // } else if ((seat === boatSize - 2 && boatSize % 2 === 0) || (seat === boatSize - 1)) { // either coxed boat and stroke is 2nd to last seat, or uncoxed and stroke is last
-  //   seat = 's:';
-  // } else {
-  //   seat = `${seat}:`
-  // }
-
+const Seat = ({ athlete, seat, roster, boatNum, boatSize, onDragOver, onDrop, onPickUp, removeAthlete, onAthleteDropDownSelection }) => {
   return (
     <SeatWrapper onDrop={(e)=>onDrop(e, null, boatNum, seat)} onDragStart={(e)=>onPickUp(e, athlete.id, boatNum, seat)} >
       <SeatNumber>
@@ -79,13 +109,26 @@ const Seat = ({ athlete, seat, boatNum, boatSize, onDragOver, onDrop, onPickUp, 
               ? `s:`
               : `${seat}:`}
       </SeatNumber>
-      <Athlete
-        port={seat % 2 === 0}
-        empty={athlete === undefined ? false : athlete.id === undefined}
-        side={athlete === undefined ? null : athlete.side}
-        draggable={athlete === undefined ? false : athlete.id !== undefined} >
-          {athlete.name}
+      {athlete.id >=0
+      ? <Athlete
+          onChange={(e)=>onAthleteDropDownSelection(e, boatNum, seat)}
+          port={seat % 2 === 0}
+          empty={athlete === undefined ? false : athlete.id === undefined}
+          side={athlete === undefined ? null : athlete.side}
+          draggable={athlete === undefined ? false : athlete.id !== undefined} >{athlete.name}
         </Athlete>
+      : <AthleteSelect
+          onChange={(e)=>onAthleteDropDownSelection(e, boatNum, seat)}
+          port={seat % 2 === 0}
+          empty={athlete === undefined ? false : athlete.id === undefined}
+          side={athlete === undefined ? null : athlete.side}
+          draggable={athlete === undefined ? false : athlete.id !== undefined} >
+            <option value={athlete.name} defaultValue>{athlete.id}</option>
+            {roster.map((rosterAthlete, index) => (
+              <option key={index} value={rosterAthlete.id}>{rosterAthlete.name}</option>
+            ))}
+        </AthleteSelect>}
+
       <SeatDelete onClick={(e)=>{removeAthlete(e, boatNum, seat)}}></SeatDelete>
     </SeatWrapper>
   )

@@ -40,7 +40,7 @@ const Button = styled.button`
   }
 `;
 
-const Boat = ({ boats, oars, lineup, boatNum, onDrop, onDragOver, onPickUp, boatClearOrDelete, removeAthlete }) => (
+const Boat = ({ boats, oars, lineup, roster, boatNum, onDrop, onDragOver, onPickUp, boatClearOrDelete, removeAthlete, onAthleteDropDownSelection }) => (
   <BoatWrapper onDragOver={(e)=>onDragOver(e)}>
     <BoatAndOars
       oars={oars}
@@ -53,12 +53,14 @@ const Boat = ({ boats, oars, lineup, boatNum, onDrop, onDragOver, onPickUp, boat
         key={index}
         athlete={athlete}
         seat={index}
+        roster={roster}
         boatNum={boatNum}
         boatSize={lineup.length}
         onDrop={onDrop}
         onDragOver={onDragOver}
         onPickUp={onPickUp}
         removeAthlete={removeAthlete}
+        onAthleteDropDownSelection={onAthleteDropDownSelection}
       />
     ))}
     <ButtonWrapper>

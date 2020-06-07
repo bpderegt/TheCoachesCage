@@ -20,20 +20,23 @@ const PracticeWrapper = styled.div`
   }
 `;
 
-const BoatAndWork = ({ lineups, boats, oars, roster, onDrop, onDragOver, onPickUp, boatClearOrDelete, removeAthlete }) => {
+const BoatAndWork = ({ lineups, boats, oars, roster, onDrop, onDragOver, onPickUp, boatClearOrDelete, removeAthlete, onAthleteDropDownSelection }) => {
   return (
     <PracticeWrapper>
       {lineups.map((lineup, index) => (
         <PerCrew key={index}
-          oars={ oars }
-          boats={ boats }
+          oars={oars}
+          boats={boats}
+          roster={roster}
           boatNum={index}
           lineup={lineup}
           onDrop={onDrop}
           onDragOver={onDragOver}
           onPickUp={onPickUp}
           boatClearOrDelete={boatClearOrDelete}
-          removeAthlete={removeAthlete}/>
+          removeAthlete={removeAthlete}
+          onAthleteDropDownSelection={onAthleteDropDownSelection}
+        />
       ))}
     </PracticeWrapper>
   )
