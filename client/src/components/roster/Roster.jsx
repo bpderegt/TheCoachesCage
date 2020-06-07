@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import Athlete from './Athlete.jsx'
+import Rower from './Rower.jsx';
+import Coxswain from './Coxswain.jsx';
+import CoxswainBanner from './CoxswainBanner.jsx';
 
 const RosterWrapper = styled.div`
   display: flex;
@@ -38,11 +40,15 @@ const ListWrapper = styled.div`
     width: 0;
   }
 `;
+const CoxswainWrapper = styled.div`
+
+`;
 
 const Name = styled.div`
   user-select: none;
   width: 7.6em;
 `;
+
 const Time = styled.select`
   -webkit-appearance: none;
   user-select: none;
@@ -58,12 +64,20 @@ const Time = styled.select`
     cursor: pointer;
   }
 `;
+
 const Weight = styled.div`
   user-select: none;
   width: 3em;
 `;
 
-const Roster = ({ roster, sortParams, paramIdx, onPickUp, onDrop, onDragOver, paramChange }) => {
+const coxswainBanner = {
+  status: 3,
+  id: 'cB',
+  name: 'Show Coxswains',
+  side: 'coxswain'
+}
+
+const Roster = ({ roster, coxswains, sortParams, paramIdx, coxswainHide, onPickUp, onDrop, onDragOver, paramChange, coxswainToggle }) => {
 
   return (
     <RosterWrapper>
@@ -80,8 +94,15 @@ const Roster = ({ roster, sortParams, paramIdx, onPickUp, onDrop, onDragOver, pa
         <Weight>Weight</Weight>
       </HeaderWrapper>
       <ListWrapper onDragOver={(e)=>onDragOver(e)} onDrop={(e)=>onDrop(e, null, null)}>
+        <CoxswainWrapper>
+          <CoxswainBanner coxswainHide={coxswainHide} coxswainToggle={coxswainToggle} />
+          { !coxswainHide
+            ? coxswains.map((coxswain, index) => (
+              <Coxswain key={index} athlete={coxswain} onPickUp={onPickUp} />
+            )) : null }
+        </CoxswainWrapper>
         {roster.map((athlete, index) => (
-          <Athlete key={index} athlete={athlete} onPickUp={onPickUp} />
+          <Rower key={index + coxswains.length} athlete={athlete} onPickUp={onPickUp} />
         ))}
       </ListWrapper>
     </RosterWrapper>

@@ -72,8 +72,8 @@ const AthleteSelect = styled.select`
   background:
     ${props =>
       props.empty ? "#e8e9e8"
-      : props.side === "coxswain" ? "#ffc10796"
       : props.coxswain ? "#ffc10796"
+      : props.side === "coxswain" ? "#ffc10796"
       : props.sculling ? "blue"
       : (props.port && props.side === "s") ? "linear-gradient( 90deg, #ff949496 93%, #94ffa796 93% )"
       : (!props.port && props.side === "p") ? "linear-gradient( 90deg, #94ffa796 93%, #ff949496 93% )"
@@ -101,21 +101,18 @@ const SeatDelete = styled.button`
 `;
 
 const Seat = ({ athlete, seat, roster, sculling, coxswain, boatNum, boatSize, onDragOver, onDrop, onPickUp, removeAthlete, onAthleteDropDownSelection }) => {
-  // console.log(athlete.id !== undefined)
+  // if (coxswain) console.log(boatNum, seat, coxswain)
   return (
     <SeatWrapper onDrop={(e)=>onDrop(e, null, boatNum, seat)} onDragStart={(e)=>onPickUp(e, athlete.id, boatNum, seat)} >
       <SeatNumber>
-        {seat === 1
-          ? `b:`
-          : (seat === boatSize -1 && boatSize % 2 === 0)
-            ? `c:`
-            : ((seat === boatSize - 2 && boatSize % 2 === 0) || (seat === boatSize - 1))
-              ? `s:`
-              : `${seat}:`}
+        {seat === 1 ? `b:`
+        : (coxswain) ? `c:`
+        : ((seat === boatSize - 2 && boatSize % 2 === 0) || (seat === boatSize - 1)) ? `s:`
+        : `${seat}:`}
       </SeatNumber>
       {athlete.id !== undefined
       ? <Athlete
-          onChange={(e)=>onAthleteDropDownSelection(e, boatNum, seat)}
+          onChange={ (e)=>onAthleteDropDownSelection(e, boatNum, seat) }
           port={seat % 2 === 0}
           sculling={sculling}
           coxswain={coxswain}
@@ -126,13 +123,13 @@ const Seat = ({ athlete, seat, roster, sculling, coxswain, boatNum, boatSize, on
           {athlete.name}
         </Athlete>
       : <AthleteSelect
-          onChange={(e)=>onAthleteDropDownSelection(e, boatNum, seat)}
+          onChange={ (e)=>onAthleteDropDownSelection(e, boatNum, seat) }
           port={seat % 2 === 0}
           empty={athlete === undefined ? false : athlete.id === undefined}
           side={athlete === undefined ? null : athlete.side}
           draggable={athlete === undefined ? false : athlete.id !== undefined}
           >
-            <option value={athlete.name} defaultValue>{athlete.id}</option>
+            <option value={athlete.name} defaultValue>{athlete.name}</option>
             {roster.map((rosterAthlete, index) => (
               <option key={index} value={rosterAthlete.id}>{rosterAthlete.name}</option>
             ))}

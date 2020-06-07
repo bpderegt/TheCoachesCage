@@ -48,6 +48,7 @@ const CopyRightButton = styled.button`
 `;
 
 const WorkoutText = styled.textarea`
+  background: #fffde9;
   max-width: 18em;
   border: 1px solid grey;
   font-family: 'Lato', sans-serif;

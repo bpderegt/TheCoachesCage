@@ -59,7 +59,7 @@ const Boat = ({ boats, oars, lineup, roster, boatNum, onDrop, onDragOver, onPick
         athlete={athlete}
         boatSize={lineup.length}
         sculling={!lineup[0].sweep}
-        coxswain={lineup[0].coxswain}
+        coxswain={index === lineup.length - 1 && lineup[0].coxswain}
         onDrop={onDrop}
         onPickUp={onPickUp}
         onDragOver={onDragOver}

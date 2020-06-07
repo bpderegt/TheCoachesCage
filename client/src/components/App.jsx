@@ -88,7 +88,8 @@ class App extends React.Component {
       boatClassSelect: '8+',
       boats: {},
       oars: {},
-      workouts: ['']
+      workouts: [''],
+      coxswainHide: true
     }
     this.onDrop = this.onDrop.bind(this);
     this.addBoat = this.addBoat.bind(this);
@@ -97,6 +98,7 @@ class App extends React.Component {
     this.paramChange = this.paramChange.bind(this);
     this.onCopyWorkout = this.onCopyWorkout.bind(this);
     this.removeAthlete = this.removeAthlete.bind(this);
+    this.coxswainToggle = this.coxswainToggle.bind(this);
     this.onWorkoutChange = this.onWorkoutChange.bind(this);
     this.boatClassChange = this.boatClassChange.bind(this);
     this.boatClearOrDelete = this.boatClearOrDelete.bind(this);
@@ -163,7 +165,6 @@ class App extends React.Component {
       lineups[boat][seat] = currAthlete;
       currAthlete.boated += 1;
     }
-
     this.setState({
       lineups, athletes
     });
@@ -172,10 +173,8 @@ class App extends React.Component {
   removeAthlete(e, boat, seat) {
     e.preventDefault();
     const { lineups, athletes } = this.state;
-
     athletes[lineups[boat][seat].id] ? athletes[lineups[boat][seat].id].boated = Math.max(0, athletes[lineups[boat][seat].id].boated - 1) : null
     lineups[boat][seat] = {};
-
     this.setState({
       lineups, athletes
     })
@@ -184,21 +183,17 @@ class App extends React.Component {
   boatClearOrDelete(e, boat) {
     let action = e.target.className.split(' ');
     action = action[action.length - 1];
-
     const { lineups, athletes, workouts } = this.state;
-
     lineups[boat].forEach((athlete, index) => {
       if (index !== 0) {
         athletes[athlete.id] ? athletes[athlete.id].boated = Math.max(0, athletes[athlete.id].boated - 1) : null
         lineups[boat][index] = {};
       }
     })
-
     if (action === "delete") {
       lineups.splice(boat, 1)
       workouts.splice(boat, 1)
     }
-
     this.setState({
       lineups, athletes, workouts
     })
@@ -283,7 +278,6 @@ class App extends React.Component {
     this.setState({
       workouts
     })
-    console.log(this.state.workouts)
   }
 
   onCopyWorkout(e, boat) {
@@ -299,6 +293,12 @@ class App extends React.Component {
     })
   }
 
+  coxswainToggle(e) {
+    let { coxswainHide } = this.state;
+    coxswainHide = !coxswainHide;
+    this.setState({ coxswainHide })
+  }
+
   render() {
     const {
       lineups,
@@ -307,9 +307,11 @@ class App extends React.Component {
       paramIdx,
       boats,
       oars,
-      workouts
+      workouts,
+      coxswainHide
     } = this.state;
     const roster = [];
+    const coxswains = [];
     //status check <-- tech debt right here, maybe plug this into the add/drop
     for (let key in athletes) {
       athletes[key].id = key;
@@ -324,9 +326,14 @@ class App extends React.Component {
       } else if (athletes[key].absent) {
         athletes[key].status = 5;
       }
-      roster.push(athletes[key]);
+      athletes[key].side === "coxswain" ? coxswains.push(athletes[key]) : roster.push(athletes[key]);
     };
     roster.sort(
+      firstBy(athlete => athlete.status)
+      .thenBy("param1")
+      .thenBy("param2")
+    );
+    coxswains.sort(
       firstBy(athlete => athlete.status)
       .thenBy("param1")
       .thenBy("param2")
@@ -349,17 +356,21 @@ class App extends React.Component {
         <ContentWrapper>
           <Roster
             roster={ roster }
+            coxswains= { coxswains }
+            coxswainHide={ coxswainHide }
             paramIdx={ paramIdx }
             sortParams={ sortParams }
             onDrop={ this.onDrop }
             onPickUp={ this.onPickUp }
             onDragOver={ this.onDragOver }
             paramChange={ this.paramChange }
+            coxswainToggle={ this.coxswainToggle }
           />
           <BoatAndWork
             oars={ oars }
             boats={ boats }
             roster={ roster }
+            coxswains= { coxswains }
             lineups={ lineups }
             workouts={ workouts }
             onDrop={ this.onDrop }
