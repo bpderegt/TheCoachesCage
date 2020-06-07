@@ -107,7 +107,6 @@ class App extends React.Component {
     const { paramIdx } = this.state;
     axios.get(`/init/${paramIdx[0]}/${paramIdx[1]}`)
       .then(res => {
-        // console.log(res.data.equipment)
         this.setState({
           athletes: res.data.roster,
           boats: res.data.equipment[0],
@@ -159,7 +158,6 @@ class App extends React.Component {
       lineups[boat][seat] = currAthlete;
     } else {
       if (lineups[boat][seat].id !== undefined) { // overwritting from roster
-        console.log('athlete overwrite boated --')
         athletes[lineups[boat][seat].id].boated = Math.max(0, athletes[lineups[boat][seat].id].boated - 1)
       }
       lineups[boat][seat] = currAthlete;
@@ -272,20 +270,20 @@ class App extends React.Component {
   onWorkoutChange(e, boat) {
     e.preventDefault()
     const { workouts } = this.state;
-    console.log(workouts)
     workouts[boat] = e.target.value;
     this.setState({
       workouts
     })
+    console.log(this.state.workouts)
   }
 
   onCopyWorkout(e, boat) {
     e.preventDefault()
     const { workouts } = this.state;
     if (e.target.value === 'right') {
-      workouts[boat + 1] = workouts[boat];
+      if (boat < workouts.length) workouts[boat + 1] = workouts[boat];
     } else {
-      workouts[boat - 1] = workouts[boat];
+      if (boat > 0) workouts[boat - 1] = workouts[boat];
     }
     this.setState({
       workouts

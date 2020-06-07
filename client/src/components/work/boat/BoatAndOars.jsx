@@ -61,22 +61,24 @@ const BoatAndOars = ({ boats, oars, boatNum, boatDetails }) => {
   if (boatDetails.sweep) discipline = 'sweep';
   return (
     boats[boatDetails.boatClass] === undefined
-      ? <BoatAndOarWrapper></BoatAndOarWrapper>
-      :
-    <BoatAndOarWrapper>
-      <Boats name="Boats">
-        <BoatOption value="Boats" defaultValue>Boats</BoatOption>
-        {boats[boatDetails.boatClass].map((boat, index) => (
-          <BoatOption key={index} value={boat}>{boat}</BoatOption>
-        ))}
-      </Boats>
-      <Oars>
-        <option value="Oars" defaultValue>Oars</option>
-        {oars[discipline].map((oar, index) => (
-          <option key={index} value={oar}>{oar}</option>
-        ))}
-      </Oars>
-    </BoatAndOarWrapper>
+      ? <BoatAndOarWrapper>
+          <Boats></Boats>
+          <Oars></Oars>
+        </BoatAndOarWrapper>
+      : <BoatAndOarWrapper>
+          <Boats name="Boats" >
+            <BoatOption name="Boats" defaultValue>Boats</BoatOption>
+            {boats[boatDetails.boatClass].map((boat, index) => (
+              <BoatOption key={index} value={boat[0]}>{boat[0]}</BoatOption>
+            ))}
+          </Boats>
+          <Oars>
+            <option name="Oars" defaultValue>Oars</option>
+            {oars[discipline].map((oar, index) => (
+              <option key={index} value={oar[0]}>{oar[0]}</option>
+            ))}
+          </Oars>
+        </BoatAndOarWrapper>
   )
 }
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import BoatAndOars from './BoatAndOars.jsx';
+import BoatAverages from './BoatAverages.jsx'
 import Seat from './Seat.jsx';
 
 const BoatWrapper = styled.div`
@@ -58,6 +59,7 @@ const Boat = ({ boats, oars, lineup, roster, boatNum, onDrop, onDragOver, onPick
         athlete={athlete}
         boatSize={lineup.length}
         sculling={!lineup[0].sweep}
+        coxswain={lineup[0].coxswain}
         onDrop={onDrop}
         onPickUp={onPickUp}
         onDragOver={onDragOver}
@@ -65,6 +67,7 @@ const Boat = ({ boats, oars, lineup, roster, boatNum, onDrop, onDragOver, onPick
         onAthleteDropDownSelection={onAthleteDropDownSelection}
       />
     ))}
+    <BoatAverages lineup={lineup}/>
     <ButtonWrapper>
       <Button className="clear" onClick={(e)=>boatClearOrDelete(e, boatNum)}>Clear Lineup</Button>
       <Button className="delete" onClick={(e)=>boatClearOrDelete(e, boatNum)}>Delete Boat</Button>
