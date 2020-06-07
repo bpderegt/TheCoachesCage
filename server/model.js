@@ -10,7 +10,7 @@ const init = (param1, param2, callback) => {
   const equipment = [boats, oars];
   let firstParam = twoKPB;
   if (param1 === '1') firstParam = sixX5;
-  const secondParam = weights;
+  // const secondParam = weights;
   for (let athlete in roster) {
     if (firstParam[athlete]) {
       roster[athlete].param1 = firstParam[athlete].time;
@@ -27,7 +27,7 @@ const updatedParams = (param1, param2, callback) => {
   const roster = staticAthletes;
   let firstParam = twoKPB;
   if (param1 === '1') firstParam = sixX5;
-  const secondParam = weights;
+  // const secondParam = weights;
   for (let athlete in roster) {
     if (firstParam[athlete]) {
       roster[athlete].param1 = firstParam[athlete].time;
