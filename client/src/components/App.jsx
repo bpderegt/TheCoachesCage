@@ -242,14 +242,23 @@ class App extends React.Component {
 
   paramChange(e) {
     e.preventDefault();
-    const { sortParams } = this.state;
+    const { sortParams, lineups } = this.state;
     this.setState({
       paramIdx: [sortParams.indexOf(e.target.value), 1]
     })
     axios.get(`/updatedParams/${sortParams.indexOf(e.target.value)}/${1}`)
       .then(res => {
+        lineups.map(lineup => {
+          lineup.map(athlete => {
+            if (athlete.id !== undefined) {
+              athlete.param1 = res.data[athlete.id].param1
+              athlete.param2 = res.data[athlete.id].param2
+            }
+          })
+        })
         this.setState({
-          athletes: res.data
+          athletes: res.data,
+          lineups
         })
       })
       .catch(err => console.error(err));
