@@ -6,6 +6,7 @@ const WorkoutWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   margin-left: 1.75em;
+  max-height: 60%;
 `;
 
 const SelectionWrapper = styled.div`
@@ -54,7 +55,7 @@ const WorkoutText = styled.textarea`
   font-family: 'Lato', sans-serif;
   border-radius: 0.5em;
   margin: 0.5em;
-  // margin-left: 2.5em
+  height: 22em;
   :focus {
     outline: none;
   }

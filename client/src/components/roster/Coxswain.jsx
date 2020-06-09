@@ -51,6 +51,7 @@ const SideWrapper = styled.div`
   height: 0.7em;
   width: 0.7em;
   border-radius: 100%;
+
   border: 2px solid black;
   border-right: 2px solid transparent;
   margin: 0em 0.125em 0em;

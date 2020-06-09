@@ -3,12 +3,19 @@ import styled from 'styled-components';
 const moment = require('moment');
 moment().format();
 
+const InfoWrapper = styled.div`
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-left: 2.25em;
+`;
+
 const AveragesWrapper = styled.div`
   width: 100%;
   display: flex;
-  flex-direction: rowing;
+  flex-direction: row;
   justify-content: flex-end;
-  margin-left: 1.75em;
   padding: 0em 1em 0em 0em;
 `;
 
@@ -23,6 +30,10 @@ const AvgWeight = styled.div`
   font-size: 0.9em;
   text-align: right;
   margin-right: 0.95em;
+`;
+
+const BoatNum = styled.div`
+  font-weight: 600;
 `;
 
 const crewSplitToNum = (arr) => {
@@ -73,11 +84,14 @@ const crewWeightAvg = (arr) => {
   return avg.toFixed(1)
 }
 
-const BoatAverages = ({ lineup }) => (
-  <AveragesWrapper>
-    <AvgSplit>{timeToString(crewSplitToNum(lineup))}</AvgSplit>
-    <AvgWeight>{crewWeightAvg(lineup)}</AvgWeight>
-  </AveragesWrapper>
+const BoatAverages = ({ boatNum, lineup }) => (
+  <InfoWrapper>
+    <BoatNum>{boatNum + 1}</BoatNum>
+    <AveragesWrapper>
+      <AvgSplit>{timeToString(crewSplitToNum(lineup))}</AvgSplit>
+      <AvgWeight>{crewWeightAvg(lineup)}</AvgWeight>
+    </AveragesWrapper>
+  </InfoWrapper>
 )
 
 export default BoatAverages;

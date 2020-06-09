@@ -11,10 +11,9 @@ moment().format();
 
 const PageWrapper = styled.div`
   font-family: 'Lato', sans-serif;
-  // border: 2px solid red;
   background: #e8e8e8;
-  height: 95vh;
-  width: 95vw;
+  height: 97vh;
+  width: 97vw;
   position: relative;
 `;
 
@@ -27,13 +26,14 @@ const HeaderWrapper = styled.div`
 const ContentWrapper = styled.div`
   display: flex;
   flex-direction: row;
+  height: 90vh;
 `;
 
 const AddBoat = styled.button`
   margin-left: 20px;
   font-size: 1em;
   user-select: none;
-  padding: 0.5em 0em 0.5em 0.5em;
+  padding: 0.5em 0em 0.5em 0.25em;
   border: none;
   border-radius: 1em 0em 0em 1em;
   height: 2em;
@@ -53,7 +53,7 @@ const AddBoat = styled.button`
 
 const BoatClassSelect = styled.select`
   font-size: 1em;
-  padding: 0.4em 0em 0.4em 0.45em;
+  padding: 0.4em 0em 0.4em 0.3em;
   user-select: none;
   border: none;
   border-radius: 0em 1em 1em 0em;
@@ -278,6 +278,7 @@ class App extends React.Component {
     this.setState({
       workouts
     })
+    console.log(this.state);
   }
 
   onCopyWorkout(e, boat) {

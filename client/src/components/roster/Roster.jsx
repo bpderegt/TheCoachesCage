@@ -8,15 +8,15 @@ const RosterWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  height: 97%;
+  min-width: 18em;
   background: white;
   border: 1px solid #dcdcdc;
   border-radius: 1em;
   box-shadow: 0.25px 1px 1px black;
   margin-right: 2em;
-  width: 18em;
   padding: 0.25em;
   float: left;
-  height: 88vh;
 `;
 
 const HeaderWrapper = styled.div`
@@ -28,7 +28,7 @@ const HeaderWrapper = styled.div`
 `;
 
 const ListWrapper = styled.div`
-  height: 84vh;
+  height: 86%;
   border-radius: 1em;
   position: absolute;
   top: 6.25em;

@@ -3,15 +3,16 @@ import styled from 'styled-components';
 import PerCrew from './PerCrew.jsx';
 
 const PracticeWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  height: 98%;
+  width: 77%;
   background: white;
   border: 1px solid #dcdcdc;
   border-radius: 1em;
   box-shadow: 0.25px 1px 1px black;
-  display: flex;
-  flex-direct: row;
-  height: 90vh;
-  width: 80vw;
-  position: absolute;
+  // position: absolute;
   left: 20em;
   overflow: auto;
   ::-webkit-scrollbar {

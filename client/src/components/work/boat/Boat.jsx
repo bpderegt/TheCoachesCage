@@ -68,7 +68,7 @@ const Boat = ({ boats, oars, lineup, roster, boatNum, coxswains, onDrop, onDragO
         onAthleteDropDownSelection={onAthleteDropDownSelection}
       />
     ))}
-    <BoatAverages lineup={lineup}/>
+    <BoatAverages boatNum={boatNum} lineup={lineup}/>
     <ButtonWrapper>
       <Button className="clear" onClick={(e)=>boatClearOrDelete(e, boatNum)}>Clear Lineup</Button>
       <Button className="delete" onClick={(e)=>boatClearOrDelete(e, boatNum)}>Delete Boat</Button>
