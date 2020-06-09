@@ -55,7 +55,7 @@ const WorkoutText = styled.textarea`
   font-family: 'Lato', sans-serif;
   border-radius: 0.5em;
   margin: 0.5em;
-  height: 22em;
+  height: 28em;
   :focus {
     outline: none;
   }

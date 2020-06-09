@@ -32,8 +32,18 @@ const AvgWeight = styled.div`
   margin-right: 0.95em;
 `;
 
+const leftWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+`;
+
 const BoatNum = styled.div`
+  user-select: none;
   font-weight: 600;
+`;
+
+const Starboard = styled.button`
 `;
 
 const crewSplitToNum = (arr) => {

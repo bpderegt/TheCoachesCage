@@ -57,6 +57,7 @@ const Boat = ({ boats, oars, lineup, roster, boatNum, coxswains, onDrop, onDragO
         roster={roster}
         boatNum={boatNum}
         athlete={athlete}
+        rig={lineup[0].rig}
         coxswains={coxswains}
         boatSize={lineup.length}
         sculling={!lineup[0].sweep}

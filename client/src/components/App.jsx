@@ -79,16 +79,23 @@ class App extends React.Component {
       athletes: {},
       sortParams: ['2k PB', '6x500m'],
       paramIdx: [0, 1],
-      lineups: [[
-        { boatClass: '8+',
-          coxswain: true,
-          sweep: true,
-          rig: 'spspspsp'
-        },{},{},{},{},{},{},{},{},{}]],
+      lineups: [
+        [
+          { boatClass: '8+',
+            coxswain: true,
+            sweep: true,
+            rig: 'spspspsp'
+          },{},{},{},{},{},{},{},{},{}],
+        [
+          { boatClass: '8+',
+            coxswain: true,
+            sweep: true,
+            rig: 'pspspsps'
+          },{},{},{},{},{},{},{},{},{}]],
       boatClassSelect: '8+',
       boats: {},
       oars: {},
-      workouts: [''],
+      workouts: ['',''],
       coxswainHide: true
     }
     this.onDrop = this.onDrop.bind(this);

@@ -73,7 +73,6 @@ const AthleteSelect = styled.select`
   background:
     ${props =>
       props.empty ? "#e8e9e8"
-
       : props.side === "coxswain" ? "#ffc10796"
       : props.sculling ? "blue"
       : (props.port && props.side === "s") ? "linear-gradient( 90deg, #ff949496 93%, #94ffa796 93% )"
@@ -101,7 +100,7 @@ const SeatDelete = styled.button`
   }
 `;
 
-const Seat = ({ athlete, seat, roster, sculling, coxswain, boatNum, boatSize, coxswains, onDragOver, onDrop, onPickUp, removeAthlete, onAthleteDropDownSelection }) => {
+const Seat = ({ athlete, rig, seat, roster, sculling, coxswain, boatNum, boatSize, coxswains, onDragOver, onDrop, onPickUp, removeAthlete, onAthleteDropDownSelection }) => {
   // if (coxswain) console.log(boatNum, seat, coxswain)
   return (
     <SeatWrapper onDrop={(e)=>onDrop(e, null, boatNum, seat)} onDragStart={(e)=>onPickUp(e, athlete.id, boatNum, seat)} >
@@ -111,10 +110,11 @@ const Seat = ({ athlete, seat, roster, sculling, coxswain, boatNum, boatSize, co
         : ((seat === boatSize - 2 && boatSize % 2 === 0) || (seat === boatSize - 1)) ? `s:`
         : `${seat}:`}
       </SeatNumber>
+      {/* below is sloppy and not neccesary */}
       {athlete.id !== undefined
       ? <Athlete
           onChange={ (e)=>onAthleteDropDownSelection(e, boatNum, seat) }
-          port={seat % 2 === 0}
+          port={(seat + boatNum) % 2 === 0}
           sculling={sculling}
           coxswain={coxswain}
           empty={athlete === undefined ? false : athlete.id === undefined}
@@ -125,7 +125,7 @@ const Seat = ({ athlete, seat, roster, sculling, coxswain, boatNum, boatSize, co
         </Athlete>
       : <AthleteSelect
           onChange={ (e)=>onAthleteDropDownSelection(e, boatNum, seat) }
-          port={seat % 2 === 0}
+          port={(seat + boatNum) % 2 === 0}
           sculling={sculling}
           coxswain={coxswain}
           empty={athlete === undefined ? false : athlete.id === undefined}
