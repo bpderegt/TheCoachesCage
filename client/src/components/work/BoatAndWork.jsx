@@ -20,7 +20,7 @@ const PracticeWrapper = styled.div`
   }
 `;
 
-const BoatAndWork = ({ lineups, boats, oars, roster, workouts, onDrop, onDragOver, onPickUp, boatClearOrDelete, onCopyWorkout, removeAthlete, onWorkoutChange, onAthleteDropDownSelection }) => {
+const BoatAndWork = ({ lineups, boats, oars, roster, workouts, coxswains, onDrop, onDragOver, onPickUp, boatClearOrDelete, onCopyWorkout, removeAthlete, onWorkoutChange, onAthleteDropDownSelection }) => {
   return (
     <PracticeWrapper>
       {lineups.map((lineup, index) => (
@@ -32,6 +32,7 @@ const BoatAndWork = ({ lineups, boats, oars, roster, workouts, onDrop, onDragOve
           boatNum={index}
           lineup={lineup}
           workouts={workouts}
+          coxswains={coxswains}
           onDrop={onDrop}
           onPickUp={onPickUp}
           onDragOver={onDragOver}

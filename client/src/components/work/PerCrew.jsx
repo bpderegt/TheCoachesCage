@@ -13,7 +13,7 @@ const CrewWrapper = styled.div`
   padding-right: 2em;
 `;
 
-const PerCrew = ({boatNum, boats, oars, roster, lineup, workouts, onDrop, onDragOver, onPickUp, boatClearOrDelete, onCopyWorkout, removeAthlete, onWorkoutChange, onAthleteDropDownSelection}) => {
+const PerCrew = ({boatNum, boats, oars, roster, lineup, workouts, coxswains, onDrop, onDragOver, onPickUp, boatClearOrDelete, onCopyWorkout, removeAthlete, onWorkoutChange, onAthleteDropDownSelection}) => {
 
   return (
     <CrewWrapper>
@@ -23,6 +23,7 @@ const PerCrew = ({boatNum, boats, oars, roster, lineup, workouts, onDrop, onDrag
         roster={roster}
         lineup={lineup}
         boatNum={boatNum}
+        coxswains={coxswains}
         onDrop={onDrop}
         onPickUp={onPickUp}
         onDragOver={onDragOver}

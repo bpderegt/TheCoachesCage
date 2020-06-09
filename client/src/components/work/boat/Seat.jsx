@@ -37,6 +37,7 @@ const Athlete = styled.div`
   background:
     ${props =>
       props.empty ? "#e8e9e8"
+      : props.coxswain ? "#ffc10796"
       : props.side === "coxswain" ? "#ffc10796"
       : props.sculling ? "#00b6ff96"
       : (props.port && props.side === "s") ? "linear-gradient( 90deg, #ff949496 93%, #94ffa796 93% )"
@@ -72,7 +73,7 @@ const AthleteSelect = styled.select`
   background:
     ${props =>
       props.empty ? "#e8e9e8"
-      : props.coxswain ? "#ffc10796"
+
       : props.side === "coxswain" ? "#ffc10796"
       : props.sculling ? "blue"
       : (props.port && props.side === "s") ? "linear-gradient( 90deg, #ff949496 93%, #94ffa796 93% )"
@@ -100,7 +101,7 @@ const SeatDelete = styled.button`
   }
 `;
 
-const Seat = ({ athlete, seat, roster, sculling, coxswain, boatNum, boatSize, onDragOver, onDrop, onPickUp, removeAthlete, onAthleteDropDownSelection }) => {
+const Seat = ({ athlete, seat, roster, sculling, coxswain, boatNum, boatSize, coxswains, onDragOver, onDrop, onPickUp, removeAthlete, onAthleteDropDownSelection }) => {
   // if (coxswain) console.log(boatNum, seat, coxswain)
   return (
     <SeatWrapper onDrop={(e)=>onDrop(e, null, boatNum, seat)} onDragStart={(e)=>onPickUp(e, athlete.id, boatNum, seat)} >
@@ -125,21 +126,24 @@ const Seat = ({ athlete, seat, roster, sculling, coxswain, boatNum, boatSize, on
       : <AthleteSelect
           onChange={ (e)=>onAthleteDropDownSelection(e, boatNum, seat) }
           port={seat % 2 === 0}
+          sculling={sculling}
+          coxswain={coxswain}
           empty={athlete === undefined ? false : athlete.id === undefined}
           side={athlete === undefined ? null : athlete.side}
           draggable={athlete === undefined ? false : athlete.id !== undefined}
           >
             <option value={athlete.name} defaultValue>{athlete.name}</option>
-            {roster.map((rosterAthlete, index) => (
-              <option key={index} value={rosterAthlete.id}>{rosterAthlete.name}</option>
-            ))}
+            {coxswain
+              ? coxswains.map((rosterAthlete, index) => (
+                <option key={index} value={rosterAthlete.id}>{rosterAthlete.name}</option>
+              ))
+              : roster.map((rosterAthlete, index) => (
+                <option key={index} value={rosterAthlete.id}>{rosterAthlete.name}</option>
+              ))}
         </AthleteSelect>}
 
       <SeatDelete onClick={(e)=>{removeAthlete(e, boatNum, seat)}}></SeatDelete>
     </SeatWrapper>
   )
 }
-//
-//
-
 export default Seat;

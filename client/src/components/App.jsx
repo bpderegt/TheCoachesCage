@@ -13,8 +13,8 @@ const PageWrapper = styled.div`
   font-family: 'Lato', sans-serif;
   // border: 2px solid red;
   background: #e8e8e8;
-  height: 98vh;
-  width: 98vw;
+  height: 95vh;
+  width: 95vw;
   position: relative;
 `;
 
@@ -356,10 +356,10 @@ class App extends React.Component {
         <ContentWrapper>
           <Roster
             roster={ roster }
-            coxswains= { coxswains }
-            coxswainHide={ coxswainHide }
             paramIdx={ paramIdx }
+            coxswains= { coxswains }
             sortParams={ sortParams }
+            coxswainHide={ coxswainHide }
             onDrop={ this.onDrop }
             onPickUp={ this.onPickUp }
             onDragOver={ this.onDragOver }
@@ -370,9 +370,9 @@ class App extends React.Component {
             oars={ oars }
             boats={ boats }
             roster={ roster }
-            coxswains= { coxswains }
             lineups={ lineups }
             workouts={ workouts }
+            coxswains={ coxswains }
             onDrop={ this.onDrop }
             onPickUp={ this.onPickUp }
             onDragOver={ this.onDragOver }

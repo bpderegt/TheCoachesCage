@@ -70,12 +70,7 @@ const Weight = styled.div`
   width: 3em;
 `;
 
-const coxswainBanner = {
-  status: 3,
-  id: 'cB',
-  name: 'Show Coxswains',
-  side: 'coxswain'
-}
+
 
 const Roster = ({ roster, coxswains, sortParams, paramIdx, coxswainHide, onPickUp, onDrop, onDragOver, paramChange, coxswainToggle }) => {
 
