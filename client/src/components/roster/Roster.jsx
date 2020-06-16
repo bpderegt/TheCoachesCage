@@ -96,10 +96,9 @@ const Roster = ({ roster, coxswains, sortParams, paramIdx, coxswainHide, onPickU
         <CoxswainWrapper>
           <CoxswainBanner coxswainHide={coxswainHide} coxswainToggle={coxswainToggle} />
           <CoxswainsTransform hide={coxswainHide} length={coxswains.length}>
-            { !coxswainHide
-              ? coxswains.map((coxswain, index) => (
-                <Coxswain key={index} athlete={coxswain} onPickUp={onPickUp} />
-              )) : null }
+            {coxswains.map((coxswain, index) => (
+                <Coxswain key={index} hide={coxswainHide} athlete={coxswain} onPickUp={onPickUp} />
+              ))}
             </CoxswainsTransform>
         </CoxswainWrapper>
         {roster.map((athlete, index) => (

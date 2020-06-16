@@ -32,6 +32,9 @@ git commit
 git push origin master
 
 
+
+pm2 stop server/index.js
+
 cd
 
 cd TheCoachesCage

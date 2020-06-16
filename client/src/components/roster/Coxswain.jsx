@@ -2,21 +2,34 @@ import React from 'react';
 import styled from 'styled-components';
 
 const AthleteWrapper = styled.div`
+  height:
+    ${props =>
+      props.hide ? '0'
+      : '1.2'}em;
+  transition: height 250ms ease;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  box-shadow: 0px 1px 1px grey;
+  box-shadow:
+    ${props =>
+      props.hide ? "none"
+      : "0px 1px 1px grey"};
   border-radius: 1em;
   margin: 0.1em;
   padding: 0.1em;
   margin-bottom: 0.3em;
   color:
     ${props =>
-      props.status < 3 ? "white" : "black"};
+      props.hide ? "transparent"
+      : props.status < 3 ? "white"
+      : "black"};
+  transition-delay: 250ms;
+  transition-property: color;
   background:
     ${(props) =>
-      props.status === 1 ? "red"
+      props.hide ? "transparent"
+      : props.status === 1 ? "red"
       : props.status === 2 ? "red"
       : props.status === 3 ? "#ffc10796"
       : props.status === 4 ? "#90ee90bd"
@@ -55,14 +68,18 @@ const SideWrapper = styled.div`
   margin: 0em 0.125em 0em;
 `;
 
-const Coxswain = ({ athlete, onPickUp }) => {
+const Coxswain = ({ athlete, hide, onPickUp }) => {
   // console.log(athlete)
   return (
-    <AthleteWrapper status={athlete.status} id={athlete.id} onDragStart={(e)=>onPickUp(e, athlete.id)} draggable>
-      <NameWrapper>{athlete.name}</NameWrapper>
-      <Param1Wrapper>{athlete.side}</Param1Wrapper>
-      <SideWrapper side={athlete.side}> </SideWrapper>
-    </AthleteWrapper>
+    <div>
+      {hide
+      ? <AthleteWrapper hide={hide}></AthleteWrapper>
+      : <AthleteWrapper hide={hide} status={athlete.status} id={athlete.id} onDragStart={(e)=>onPickUp(e, athlete.id)} draggable>
+        <NameWrapper>{athlete.name}</NameWrapper>
+        <Param1Wrapper>{athlete.side}</Param1Wrapper>
+        <SideWrapper side={athlete.side}> </SideWrapper>
+      </AthleteWrapper>}
+    </div>
   )
 }
 
