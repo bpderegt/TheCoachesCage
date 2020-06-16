@@ -396,16 +396,4 @@ class App extends React.Component {
   }
 }
 
-// const returnToRoster = (athlete, lineups, boat, seat) => {
-//   athlete.status = Math.max(athlete.status - 1, 0);
-//   lineups[boat][seat] = {};
-//   return [athlete, lineups];
-// }
-
-// const addToBoat = (athlete, lineups, boat, seat) => {
-//   athlete.status += 1;
-//   lineup[boat][seat] = athlete;
-//   return [athlete, lineups];
-// }
-
 export default App;
