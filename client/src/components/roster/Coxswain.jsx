@@ -24,7 +24,7 @@ const AthleteWrapper = styled.div`
       props.hide ? "transparent"
       : props.status < 3 ? "white"
       : "black"};
-  transition-delay: 250ms;
+  transition-delay: 100ms;
   transition-property: color;
   background:
     ${(props) =>
