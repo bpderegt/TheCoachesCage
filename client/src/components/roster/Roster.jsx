@@ -40,8 +40,13 @@ const ListWrapper = styled.div`
     width: 0;
   }
 `;
-const CoxswainWrapper = styled.div`
 
+const CoxswainWrapper = styled.div`
+`;
+
+const CoxswainsTransform = styled.div`
+height: ${(props) => props.hide ? '0' : props.length * 1.70}em;
+transition: height 250ms ease;
 `;
 
 const Name = styled.div`
@@ -73,7 +78,6 @@ const Weight = styled.div`
 
 
 const Roster = ({ roster, coxswains, sortParams, paramIdx, coxswainHide, onPickUp, onDrop, onDragOver, paramChange, coxswainToggle }) => {
-
   return (
     <RosterWrapper>
       <HeaderWrapper>
@@ -91,10 +95,12 @@ const Roster = ({ roster, coxswains, sortParams, paramIdx, coxswainHide, onPickU
       <ListWrapper onDragOver={(e)=>onDragOver(e)} onDrop={(e)=>onDrop(e, null, null)}>
         <CoxswainWrapper>
           <CoxswainBanner coxswainHide={coxswainHide} coxswainToggle={coxswainToggle} />
-          { !coxswainHide
-            ? coxswains.map((coxswain, index) => (
-              <Coxswain key={index} athlete={coxswain} onPickUp={onPickUp} />
-            )) : null }
+          <CoxswainsTransform hide={coxswainHide} length={coxswains.length}>
+            { !coxswainHide
+              ? coxswains.map((coxswain, index) => (
+                <Coxswain key={index} athlete={coxswain} onPickUp={onPickUp} />
+              )) : null }
+            </CoxswainsTransform>
         </CoxswainWrapper>
         {roster.map((athlete, index) => (
           <Rower key={index + coxswains.length} athlete={athlete} onPickUp={onPickUp} />

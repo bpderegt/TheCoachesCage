@@ -40,4 +40,4 @@ git pull origin master
 
 killall node
 
-nohup node server/index.js
+pm2 start server/index.js
