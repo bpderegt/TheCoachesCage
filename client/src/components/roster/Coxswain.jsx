@@ -7,6 +7,7 @@ const AthleteWrapper = styled.div`
       props.hide ? '0'
       : '1.2'}em;
   transition: height 250ms ease;
+  transform: translate(0,0);
   display: flex;
   flex-direction: row;
   align-items: center;
