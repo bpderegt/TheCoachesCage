@@ -18,7 +18,7 @@ module.exports = {
   17: {realName: 'Ryan Vaughn', fakeName: 'Laisha Zboncak'},
   18: {realName: 'Ethan Hiew', fakeName: 'Javonte Fay'},
   19: {realName: 'Kai Hoite', fakeName: 'Kraig Smith'},
-  20: {realName: 'William Payne', fakeName: "Candelario O'Connell"},
+  20: {realName: 'William Payne', fakeName: "Candelario OConnell"},
   21: {realName: 'Kobe Martin', fakeName: 'Annabell Haag'},
   22: {realName: 'Patrick Kenneally', fakeName: 'Meredith Price'},
   23: {realName: 'Peter Murphy', fakeName: 'Esther Berge'},
@@ -44,7 +44,7 @@ module.exports = {
   44: {realName: 'Sam Goldberg', fakeName: 'Breanna Veum'},
   45: {realName: 'Adrien Alvira', fakeName: 'Tara Berge'},
   46: {realName: 'Jack Woll', fakeName: 'Carlos Luettgen'},
-  47: {realName: 'Richard Reid', fakeName: "Jaqueline O'Conner"},
+  47: {realName: 'Richard Reid', fakeName: "Jaqueline OConner"},
   48: {realName: 'Jake Gunderman', fakeName: 'Abby Kub'},
   49: {realName: 'Max Kreutzelman', fakeName: 'Tomas Will'},
   50: {realName: 'Wilson Baatar', fakeName: 'Kenneth Brekke'},
@@ -80,7 +80,7 @@ module.exports = {
   80: {realName: 'Andrew Stoddard', fakeName: 'Logan Renner'},
   81: {realName: 'Christian Granados', fakeName: 'Anya Grimes'},
   82: {realName: 'Lorenzo Nazzari', fakeName: 'Pedro Davis'},
-  83: {realName: 'Ollie Elmgren', fakeName: "Misty O'Conner"},
+  83: {realName: 'Ollie Elmgren', fakeName: "Misty OConner"},
   84: {realName: 'Jack Saroni', fakeName: 'Juliet Kulas'},
   85: {realName: 'Jake Benham', fakeName: 'Sincere Hansen'},
   86: {realName: 'Santiago Robles', fakeName: 'Reynold Bayer'},
@@ -88,7 +88,14 @@ module.exports = {
   88: {realName: 'Noah Kim', fakeName: 'Jonathon Ziemann'},
   89: {realName: 'Ryan Tripp', fakeName: 'Tony Rippin'},
   90: {realName: 'Sina Panah', fakeName: 'Marisol Champlin'},
-  91: {realName: 'Owen Reilly', fakeName: 'Zoey Sawayn'}
+  91: {realName: 'Owen Reilly', fakeName: 'Zoey Sawayn'},
+  92: {realName: 'Alison Prendergast', fakeName: 'Joanny Wilderman'},
+  93: {realName: 'Alix Robinson-Kronrod', fakeName: 'Lydia Fahey'},
+  94: {realName: 'Aria Chang', fakeName: 'Adrianna Rohan'},
+  95: {realName: 'Audrey Gates', fakeName: 'Alisa Hodkiewicz'},
+  96: {realName: 'Z Romero', fakeName: 'Dana Daniel'},
+  97: {realName: 'Anna O\'Reilly', fakeName: 'Marisa Senger'},
+  98: {realName: 'Gabe Seidl', fakeName: 'Rick Ebert'},
 }
 
 // for (let key in names) {

@@ -1,5 +1,3 @@
-
-
 module.exports = {
   1: { time: '6:48.4', weight: 159.8 },
   2: { time: '6:27.4', weight: 160.2 },
